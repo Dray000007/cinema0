@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="booknow3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc, collection } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyC25aNduNOEoQ6et4xssi6vQXM-7rIJrhY",
+    authDomain: "fire-c99ac.firebaseapp.com",
+    projectId: "fire-c99ac",
+    storageBucket: "fire-c99ac.appspot.com",
+    messagingSenderId: "158060566547",
+    appId: "1:158060566547:web:45430b0ef0e068cf4e87e6"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function validateSeatAndTicketCount(containerId) {
+    const selectedSeatsRef = doc(collection(db, 'seatSelection'), containerId);
+    let selectedSeats = [];
+
+    try {
+        const docSnap = await getDoc(selectedSeatsRef);
+        if (docSnap.exists()) {
+            selectedSeats = docSnap.data().seats || [];
+            console.log(`Loaded seats from Firestore for ${containerId}:`, selectedSeats);
+        } else {
+            showAlert(`No selected seats found for ${containerId} in Firestore.`);
+            return false;
+        }
+    } catch (error) {
+        console.error(`Error fetching selected seats for ${containerId}:`, error);
+        showAlert('An error occurred while retrieving selected seats.');
+        return false;
+    }
+
+    const ticketCount = parseInt(document.getElementById('count').innerText);
+    if (selectedSeats.length !== ticketCount) {
+        showAlert(`Selected seats (${selectedSeats.length}) do not match Selected tickets (${ticketCount}).`);
+        return false;
+    }
+
+    return true;
+}
+
+document.getElementById('review-pay').addEventListener('click', async (event) => {
+    const containerId = 'seatie33';
+    const isValid = await validateSeatAndTicketCount(containerId);
+
+    if (!isValid) {
+        event.stopPropagation();
+    } else {
+        togglePopup();
+    }
+});
+
+async function payNow() {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+
+    if (!name || !email) {
+        showAlert('Please enter your name and email.');
+        return;
+    }
+
+    const totalAmount = document.getElementById('total-amount').textContent.replace('N', '').trim();
+    const amountInKobo = parseInt(totalAmount) * 100;
+
+    const containerId = 'seatie33';
+    const isValid = await validateSeatAndTicketCount(containerId);
+
+    if (!isValid) return;
+
+    const handler = PaystackPop.setup({
+        key: 'pk_test_c89596293d927b95998f56f466b7c50159979d6b',
+        email: email,
+        amount: amountInKobo,
+        currency: 'NGN',
+        ref: `ref_${Math.floor(Math.random() * 1000000000 + 1)}`,
+        metadata: {
+            custom_fields: [
+                {
+                    display_name: "Customer Name",
+                    variable_name: "customer_name",
+                    value: name
+                }
+            ]
+        },
+        callback: function (response) {
+            console.log("Payment successful!", response.reference);
+            disableSeatsAfterPayment(containerId, response.reference);
+        },
+        onClose: function () {
+            showAlert('Payment process was closed.');
+        }
+    });
+
+    handler.openIframe();
+}
+
+async function disableSeatsAfterPayment(containerId, transactionReference) {
+    try {
+        const selectedRef = doc(db, 'seatSelection', containerId);
+        const disabledRef = doc(db, 'disabledSeats', containerId);
+
+        const selectedSnap = await getDoc(selectedRef);
+        const selectedSeats = selectedSnap.exists() ? selectedSnap.data().seats || [] : [];
+
+        await setDoc(disabledRef, { seats: selectedSeats });
+        console.log("Disabled seats saved:", selectedSeats);
+
+        sessionStorage.setItem('paymentSuccess', 'true');
+        sessionStorage.setItem('disabledSeatsTimestamp', Date.now().toString());
+
+        setTimeout(async () => {
+            await setDoc(disabledRef, { seats: [] });
+            await setDoc(selectedRef, { seats: [] });
+            console.log("30s expired: Cleared disabled and selected seats");
+        }, 30000);
+
+        window.location.href = "buytickets.html";
+    } catch (err) {
+        console.error("Error disabling seats:", err);
+        showAlert("Failed to save disabled seats.");
+    }
+}
+
+async function markDisabledSeats(containerId) {
+    const disabledRef = doc(db, 'disabledSeats', containerId);
+    const container = document.querySelector(`#${containerId} .seats`);
+
+    try {
+        const snap = await getDoc(disabledRef);
+        const seats = snap.exists() ? snap.data().seats || [] : [];
+
+        seats.forEach(seatId => {
+            const seat = Array.from(container.querySelectorAll('.seat')).find(s => s.innerText === seatId);
+            if (seat) {
+                seat.classList.add('temp-disabled');
+                seat.style.pointerEvents = 'none';
+                seat.style.backgroundColor = 'gray';
+            }
+        });
+
+        setTimeout(async () => {
+            seats.forEach(seatId => {
+                const seat = Array.from(container.querySelectorAll('.seat')).find(s => s.innerText === seatId);
+                if (seat) {
+                    seat.classList.remove('temp-disabled');
+                    seat.style.pointerEvents = 'auto';
+                    seat.style.backgroundColor = '';
+                }
+            });
+
+            await setDoc(disabledRef, { seats: [] });
+            console.log("Disabled seats cleared after timeout.");
+        }, 30000);
+    } catch (err) {
+        console.error("Error loading disabled seats:", err);
+    }
+}
+
+window.addEventListener("DOMContentLoaded", async () => {
+    const containerId = 'seatie33';
+
+    if (!sessionStorage.getItem(`seatDataInitialized_${containerId}`)) {
+        await clearSeatDataOnReload(containerId);
+        sessionStorage.setItem(`seatDataInitialized_${containerId}`, 'true');
+    }
+
+    await markDisabledSeats(containerId);
+});
+
+async function clearSeatDataOnReload(containerId) {
+    const selectedRef = doc(db, 'seatSelection', containerId);
+    await setDoc(selectedRef, { seats: [] });
+}
+
+window.payNow = payNow;
+</script>
+
+        
+</head>
+<body>
+    <main>
+        <div class="navbar">
+          <nav>
+              <img src="lionn-removebg-preview.png" alt="logo here">
+              <h2>LION CINEMA</h2>
+              <img class="star" src="starr-removebg-preview.png" alt="">
+              
+              <span class="material-symbols-outlined nav-dropdown-toggle">menu</span>
+                    <div class="nav-dropdown-content">
+                    <button onclick="qww()">Food and Drinks</button>
+                    <button onclick="cube()">The Cube</button>
+                    <button onclick="blog()">The Script blog</button>
+                    <button onclick="toogleCart()">Cart</button>
+                    </div>
+              <div class="navbut">
+                  <button id="reee" onclick="qww()">Food and Drinks</button>
+                  <button id="jeee" onclick="cube()">The Cube</button>
+                  <button id="zaaa" onclick="blog()">The Script blog</button>
+              </div>
+              <div class="navlast">
+                  <button class="booyaaa" onclick="toogleCart()">Cart</button>
+              </div>
+          </nav>
+        </div>
+
+        <div class="background-section">
+            <div class="content"></div>
+        </div>
+
+        <div class="bac">
+            <span class="material-symbols-outlined">arrow_back_ios_new</span>
+            <button id="grr" onclick="ga()">Go back</button>
+        </div>
+        <div class="wea">
+            <h1>Everybody Loves Jenifa</h1>
+            <hr>
+          </div>
+        <div class="ticket-card">
+            <div class="ticket-info">
+                <div class="ticket-title">THE BLOCKBUSTER PREMIUM 2D</div>
+                <div class="ticket-subtitle">Standard screen experience ticket</div>
+                <div class="ticket-price">₦7,500</div>
+            </div>
+            <div class="counter">
+                <button onclick="decreaseCount()">-</button>
+                <span id="count">0</span>
+                <button onclick="increaseCount()">+</button>
+            </div>
+        </div>
+        <div id="selected-seats"></div>
+        <div class="review-pay" id="review-pay" >
+            <h3>Review and Pay:</h3>
+            <p id="total-amount"> N0</p>
+        </div>
+        <div class="popup" id="popup">
+            <button class="close-btn" onclick="Popup()">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <h3>Enter Your Details</h3>
+            <input type="text" id="name" placeholder="Enter your name">
+            <input type="email" id="email" placeholder="Enter your email">
+            <button onclick="payNow()">Pay Now</button>
+        </div>
+        <div id="custom-alert" class="custom-alert hidden">
+        <div class="alert-box">
+            <p id="alert-message">This is a custom alert!</p>
+            <button onclick="closeAlert()">OK</button>
+    </main>
+</body>
+</html>
+<script>
+    function qww() {
+        setTimeout(() => {
+            window.location.href = "foods&drinks.html";
+        }, 1000)
+    }
+    function ga() {
+        setTimeout(() => {
+            window.location.href = "buytickets.html";
+        }, 1000);
+    }
+
+    let count = 0;
+    const baseAmount = 7500; // Base amount from .ticket-price
+
+    function increaseCount() {
+        count++;
+        document.getElementById('count').innerText = count;
+        updateTotalAmount();
+    }
+
+    function decreaseCount() {
+        if (count > 0) {
+            count--;
+            document.getElementById('count').innerText = count;
+            updateTotalAmount();
+        }
+    }
+    
+    function updateTotalAmount() {
+        const totalAmount = baseAmount * count;
+        const totalAmountElement = document.getElementById('total-amount');
+        totalAmountElement.textContent = `N${totalAmount}`;
+
+        const reviewPayElement = document.getElementById('review-pay');
+        if (count > 0) {
+            reviewPayElement.style.display = 'block';
+        } else {
+            reviewPayElement.style.display = 'none';
+        }
+    }
+
+
+function togglePopup() {
+    const popup = document.getElementById("popup");
+    const increaseButton = document.querySelector('.counter button:nth-child(3)'); // Increase button
+    const decreaseButton = document.querySelector('.counter button:nth-child(1)'); // Decrease button
+
+    if (popup.style.display === "none" || popup.style.display === "") {
+        popup.style.display = "block";
+        // Disable the buttons
+        increaseButton.disabled = true;
+        decreaseButton.disabled = true;
+    } else {
+        popup.style.display = "none";
+        // Enable the buttons
+        increaseButton.disabled = false;
+        decreaseButton.disabled = false;
+    }
+}
+
+function Popup() {
+    const popup = document.getElementById("popup");
+    const increaseButton = document.querySelector('.counter button:nth-child(3)'); // Increase button
+    const decreaseButton = document.querySelector('.counter button:nth-child(1)'); // Decrease button
+
+    popup.style.display = "none";
+    // Enable the buttons
+    increaseButton.disabled = false;
+    decreaseButton.disabled = false;
+}    
+ function showAlert(message) {
+    document.getElementById("alert-message").textContent = message;
+    document.getElementById("custom-alert").classList.remove("hidden");
+  }
+
+  function closeAlert() {
+    document.getElementById("custom-alert").classList.add("hidden");
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.querySelector(".nav-dropdown-toggle");
+    const dropdown = document.querySelector(".nav-dropdown-content");
+
+    toggle.addEventListener("click", () => {
+      dropdown.classList.toggle("show");
+      toggle.textContent = dropdown.classList.contains("show") ? "close" : "menu";
+    });
+  });
+</script>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="cube.css">
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+</head>
+<body>
+    <main>
+        <div class="navbar">
+            <nav>
+                <img src="lionn-removebg-preview.png" alt="logo here">
+                <h2>LION CINEMA</h2>
+                <img class="star" src="starr-removebg-preview.png" alt="">
+
+                <span class="material-symbols-outlined nav-dropdown-toggle">menu</span>
+                    <div class="nav-dropdown-content">
+                    <button onclick="qww()">Food and Drinks</button>
+                    <button onclick="cube()">The Cube</button>
+                    <button onclick="blog()">The Script blog</button>
+                    <button onclick="toogleCart()">Cart</button>
+                    </div>
+                <div class="navbut">
+                    <button id="reee" onclick="qww()">Food and Drinks</button>
+                    <button id="whh">The Cube</button>
+                    <button>The Script blog</button>
+                </div>
+                <div class="navlast">
+                    <button class="booyaaa" onclick="toggleCart()">Cart</button>
+                    <div class="cart-count" id="cart-count">0</div>
+                </div>
+            </nav>
+        </div>
+        <div class="qi">
+            <div class="xa">
+                <div class="pw">
+                    <h2>Reserve Theatre</h2>
+                </div>
+            </div>
+            <div class="trr">
+                 <h2 class="rrt">MAKE OUR CUBE ALL</h2>
+            </div>
+            <div class="trtt">
+                <h2 class="errt">YOURS</h2>
+            </div>
+            <div class="whaza">
+                <h4>Host a Private Theatre Rental at Lion cinema and invite your friends and family to watch a</h4>
+                <h4>movie on the big screen. It’s perfect for a birthday, corporate event, special occasion or an</h4>
+                <h4>everyday getaway. Please enter your contact details and our representative will be in touch.</h4>
+            </div>
+        </div>
+        <div class="vl">
+            <div class="vj">
+                <h3 class="yass">Full name</h3>
+                <h3 class="yaq">Phone number</h3>
+            </div>
+            <div class="vjj">
+                <input class="rd" type="text" id="full-name" placeholder="Enter your full name">
+                <input class="rg" type="text" id="phone-number" placeholder="Enter your phone number">
+            </div>
+            <div class="vf">
+                <h3>Email</h3>
+            </div>
+            <div class="vff">
+                <input class="em" type="email" id="email" placeholder="Enter your email">
+            </div>
+            <div class="bk">
+                <h3>Request</h3>
+            </div>
+            <div class="bkk">
+                <textarea class="re" id="request" placeholder="Enter your request"></textarea>
+            </div>
+            <div class="bkkk">
+                <button id="bqz" type="submit" onclick="sendRequest()">Send Request</button>
+            </div>
+        </div>
+    </main>  
+    <section>
+        <div class="wro">
+            <h1>Light,camera, fun</h1>
+            <h1>-onlyatLioncinema</h1>
+          </div>
+        <div class="waza">
+            <div class="jre1">
+              <div class="axx">
+                <img src="lionn-removebg-preview.png" alt="logo here">
+                <h2>LION CINEMA</h2>
+                <img class="star" src="starr-removebg-preview.png" alt="">
+              </div>
+              <h4>Get the app</h4>
+              <div class="gt">
+                <button onclick="zq()">
+                  <img src="download.png" alt="">
+                  <h4>Google play</h4>
+                </button>
+                <button onclick="qx()">
+                  <img class="rtt" src="download22.png" alt="">
+                  <h4>App Store</h4>
+                </button>
+              </div>
+            </div>
+            <div class="jre2">
+              <div class="vbb">
+                  <h4>Company</h4>
+                <div class="vbb2">
+                  <h4>About us</h4>
+                  <h4>Ticket price</h4>
+                  <h4>The ScriptBlog</h4>
+                  <h4>Experiences</h4>
+                </div>
+              </div>
+            </div>
+            <div class="jre3">
+              <div class="vbb">
+                <h4>Terms</h4>
+               <div class="vbb2">
+                <h4>General</h4>
+                <h4>Ticket Sales</h4>
+                <h4>Lioncinema++</h4>
+               </div>
+              </div>
+            </div>
+            <div class="jre4">
+              <div class="vbb">
+                <h4>Contact</h4>
+              <div class="vbb2">
+                <h4>Self help</h4>
+                <h4>Contact us</h4>
+              </div>
+            </div>
+            </div>
+            <div class="jre5">
+              <div class="vbb">
+                <h4>Legal</h4>
+              <div class="vbb2">
+                <h4>PrivacyPolicy</h4>
+              </div>
+            </div>
+            </div>
+            <div class="jre6">
+              <div class="vbb">
+                <h4>Social</h4>
+              </div>
+              <div class="vbb234">
+                <img src="download1.png" alt="">
+                <img src="download 2.png" alt="">
+                <img src="download 3.png" alt="">
+                <img src="download 4.png" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>    
+    <div id="custom-alert" class="custom-alert hidden">
+  <div class="alert-box">
+    <p id="alert-message">This is a custom alert!</p>
+    <button onclick="closeAlert()">OK</button>
+  </div>
+  </div>
+      
+</body>
+</html>
+<script>
+    function qww() {
+    setTimeout(function() {
+        window.location.href = "foods&drinks.html";
+    }, 1000); 
+}
+    function showAlert(message) {
+    document.getElementById("alert-message").textContent = message;
+    document.getElementById("custom-alert").classList.remove("hidden");
+  }
+
+    function closeAlert() {
+      document.getElementById("custom-alert").classList.add("hidden");
+    }
+    function sendRequest() {
+        const fullName = document.getElementById('full-name').value;
+        const phoneNumber = document.getElementById('phone-number').value;
+        const email = document.getElementById('email').value;
+        const request = document.getElementById('request').value;
+
+        const requestData = {
+            fullName: fullName,
+            phoneNumber: phoneNumber,
+            email: email,
+            request: request
+        };
+
+        localStorage.setItem('theatreRequest', JSON.stringify(requestData));
+        if (!fullName || !phoneNumber || !email || !request) {
+            showAlert('Please fill in all fields.');
+            return;
+        }
+        showAlert('Request sent successfully!');
+        document.getElementById('full-name').value = '';
+        document.getElementById('phone-number').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('request').value = '';
+    }
+    function zq() {
+    setTimeout(function() {
+        window.location.href = "https://play.google.com/store/games?hl=en";
+    }, 1000);
+    
+  }
+
+  function qx() {
+    setTimeout(function() {
+        window.location.href = "https://www.apple.com/ios/app-store/";
+    }, 1000);
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.querySelector(".nav-dropdown-toggle");
+    const dropdown = document.querySelector(".nav-dropdown-content");
+
+    toggle.addEventListener("click", () => {
+      dropdown.classList.toggle("show");
+      toggle.textContent = dropdown.classList.contains("show") ? "close" : "menu";
+    });
+  });
+
+</script>

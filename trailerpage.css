@@ -1,0 +1,233 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    width: 100%;
+    height: 200vh;
+}
+nav{
+    width: 100%;
+    height: 10vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+nav img{
+    width: 60px;
+    height: 50px;
+    margin: 20px;
+    cursor: pointer;
+}
+nav h2{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: white;
+    margin: 30px -20px;
+    color: gold;
+    cursor: pointer;
+}
+nav .star{
+    width: 15px;
+    height: 10px;
+    margin: 22px 14px;
+}
+.navbut{
+    display: flex;
+    margin: 0 300px;
+}
+button{
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 5px;
+    margin: 30px 20px;
+    font-weight: 800;
+    cursor: pointer;
+    gap: 30px;
+    
+}
+button:hover{
+    color: antiquewhite;
+}
+.navlast{
+    right: 0;
+    position: absolute;
+}
+.navlast .booyaaa{
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 5px;
+    margin: 30px 20px;
+    font-weight: 800;
+    cursor: pointer;
+}
+.navlast .booyaaa:hover{
+    color: antiquewhite!important;
+}
+.bac{
+    display: flex;
+    color: white;
+    margin: 140px 70px;
+}
+.bac button{
+    margin: -50px 0;
+    font-size: 20px;
+    color: white;
+}
+.bac button:hover{
+    color: antiquewhite;
+}
+.wea h1{
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 40px;
+    margin: -100px 70px;
+}
+hr{
+    width: 95%;
+    color: grey;
+    margin:120px 40px;
+}
+.zae{
+    display: block;
+    
+}
+.conna2{
+    display: flex;
+    margin-top: 50px;
+    gap: 15px;
+}
+.conna4{
+    margin-top: 30px;
+}
+.b1{
+    width: 360px;
+    height: 650px;
+    border: 15px solid black;
+    background-color: black;
+    border-radius: 40px;
+}
+.pik{
+    width: 100%;
+    height: 500px;
+    background-image: url(https://www.filmhouseng.com/_next/image?url=https%3A%2F%2Ffh-storage.nyc3.digitaloceanspaces.com%2Fkffwlnky1dz8ktc-2beb40289ddfaf0430db63b56208c10c.jpeg&w=1920&q=75);
+    background-size: cover;
+    border-radius: 20px;
+}
+.b2{
+    width: 360px;
+    height: 650px;
+    border: 15px solid black;
+    background-color: black;
+    border-radius: 40px;
+}
+.pik2{
+    width: 100%;
+    height: 500px;
+    background-image: url(https://www.filmhouseng.com/_next/image?url=https%3A%2F%2Ffh-storage.nyc3.digitaloceanspaces.com%2Fdezjhv1zy3scumu-e1c3962d82110c3e4dfbbbfc406ae961.jpeg&w=1920&q=75);
+    background-size: cover;
+    border-radius: 20px;
+}
+.b3{
+    width: 360px;
+    height: 650px;
+    border: 15px solid black;
+    background-color: black;
+    border-radius: 40px;
+}
+.pik3{
+    width: 100%;
+    height: 500px;
+    background-image: url(https://www.filmhouseng.com/_next/image?url=https%3A%2F%2Ffh-storage.nyc3.digitaloceanspaces.com%2Foes28e7qnrz6n3c-a215a1b8e30550dcc3100e043491d924.jpeg&w=1920&q=75);
+    background-size: cover;
+    border-radius: 20px;
+}
+.b4{
+    width: 360px;
+    height: 650px;
+    border: 15px solid black;
+    background-color: black;
+    border-radius: 40px;
+}
+.pik4{
+    width: 100%;
+    height: 500px;
+    background-image: url(https://www.filmhouseng.com/_next/image?url=https%3A%2F%2Ffh-storage.nyc3.digitaloceanspaces.com%2Ftkgccgu0h3l2y7y-02d38abe430d76b296bdb78896dd6552.jpeg&w=1920&q=75);
+    background-size: cover;
+    border-radius: 20px;
+}
+.pik5{
+    width: 100%;
+    height: 500px;
+    background-image: url(https://www.filmhouseng.com/_next/image?url=https%3A%2F%2Ffh-storage.nyc3.digitaloceanspaces.com%2Fvbrm227t9tlm0os-2cb2df8bdeac5f84569edf0d70f73f6f.jpeg&w=3840&q=75);
+    background-size: cover;
+    border-radius: 20px;
+}
+.conna5{
+    margin-top: 20px;
+}
+.b66{
+    width: 360px;
+    height: 600px;
+    border: 15px solid black;
+    background-color: black;
+    border-radius: 40px;
+}
+.pik66{
+    width: 100%;
+    height: 500px;
+    background-image: url(https://www.filmhouseng.com/_next/image?url=https%3A%2F%2Ffh-storage.nyc3.digitaloceanspaces.com%2Fcjn42seyop02m4e-13760cb8a85ad129e22e7c3802a957a4.jpeg&w=3840&q=75);
+    background-size: cover;
+    border-radius: 20px;
+}
+.ifo{
+    margin: 10px 20px;
+}
+.ifo h3{
+    color: white;
+}
+.bzz{
+    margin: -30px 20px;
+}
+.ui{
+    width: 150px;
+    height: 40px;
+    background-color: rgb(26,26,26);
+    color: gray;
+    border-radius: 15px;
+    margin-top: 50px;
+
+}
+.uj, .uk, .ull{
+    width: 150px;
+    height: 40px;
+    background-color: rgb(26,26,26);
+    color: gray;
+    border-radius: 15px;
+    margin-top: 70px;
+}
+.um{
+    width: 150px;
+    height: 40px;
+    background-color: rgb(26,26,26);
+    color: gray;
+    border-radius: 15px;
+}
+.re{
+    font-size: 20px;
+}
+.uy{
+    width:  80px;
+    height: 40px;
+    background-color: rgb(26,26,26);
+    color: gray;
+    border-radius: 15px;
+}

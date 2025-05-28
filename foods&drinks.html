@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="foods&drink.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+
+</head>
+<body>
+    <main>
+        <div class="navbar">
+            <nav>
+                <img src="lionn-removebg-preview.png" alt="logo here">
+                <h2>LION CINEMA</h2>
+                <img class="star" src="starr-removebg-preview.png" alt="">
+
+                 <span class="material-symbols-outlined nav-dropdown-toggle">menu</span>
+                    <div class="nav-dropdown-content">
+                    <button onclick="qww()">Food and Drinks</button>
+                    <button onclick="cube()">The Cube</button>
+                    <button onclick="blog()">The Script blog</button>
+                    <button onclick="toogleCart()">Cart</button>
+                    </div>
+                <div class="navbut">
+                    <button id="whh">Food and Drinks</button>
+                    <button id="jeee" onclick="cube()">The Cube</button>
+                    <button id="zaaa" onclick="blog()">The Script blog</button>
+                </div>
+                <div class="navlast">
+                    <button class="booyaaa" onclick="toggleCart()">Cart</button>
+                    <div class="cart-count" id="cart-count">0</div>
+                </div>
+            </nav>
+        </div>
+        <div class="bac">
+            <span class="material-symbols-outlined">arrow_back_ios_new</span>
+            <button id="grr" onclick="ga()">Go back</button>
+        </div>
+        <div class="food">
+            <h1>Food and Drinks</h1>
+            <div class="foodie">
+                <div class="food1">
+                    <img src="https://www.filmhouseng.com/_next/image?url=https%3A%2F%2Ffilmhouse.s3.us-west-2.amazonaws.com%2F4e1d422276d5d150d8030aa156f7847e.png&w=1920&q=75" alt="">
+                    <div class="mo">
+                        <h2>Popcorn</h2>
+                        <p class="price">₦4000</p>
+                        <div class="bbb">
+                            <button class="increase" onclick="changeQuantity(this, 1)">+</button>
+                            <span class="quantity">0</span>
+                            <button class="decrease" onclick="changeQuantity(this, -1)">-</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="food2">
+                    <img src="https://www.filmhouseng.com/_next/image?url=https%3A%2F%2Ffilmhouse.s3.us-west-2.amazonaws.com%2F51555479ba7ddeaf7f21083ca318e25c.png&w=1920&q=75" alt="">
+                    <div class="mo2">
+                        <h2>Coca-cola Coke 60cl</h2>
+                        <p class="price">₦1500</p>
+                        <div class="ccc">
+                            <button class="increase" onclick="changeQuantity(this, 1)">+</button>
+                            <span class="quantity">0</span>
+                            <button class="decrease" onclick="changeQuantity(this, -1)">-</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="food3">
+                    <img src="https://www.filmhouseng.com/_next/image?url=https%3A%2F%2Ffilmhouse.s3.us-west-2.amazonaws.com%2Fc35cbb0eea0c6401c773ee9a1be6998b.png&w=1920&q=75" alt="">
+                    <div class="mo3">
+                        <h2>Water 75cl</h2>
+                        <p class="price">₦1500</p>
+                        <div class="aaa">
+                            <button class="increase" onclick="changeQuantity(this, 1)">+</button>
+                        <span class="quantity">0</span>
+                        <button class="decrease" onclick="changeQuantity(this, -1)">-</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="food4">
+                <img src="https://www.filmhouseng.com/_next/image?url=https%3A%2F%2Ffh-storage.nyc3.digitaloceanspaces.com%2F1109ke7revru31c-2f799e87968d3541692d77e16a438f4c.png&w=1920&q=75" alt="">
+                <div class="mo4">
+                    <h2>Chicken Shawarma</h2>
+                    <h2>+ 1 hotdog</h2>
+                    <p class="price">₦5000</p>
+                    <div class="aaa dede">
+                        <button class="increase" onclick="changeQuantity(this, 1)">+</button>
+                        <span class="quantity">0</span>
+                        <button class="decrease" onclick="changeQuantity(this, -1)">-</button>
+                    </div>
+                </div>
+            </div>
+            <div class="waza">
+                <div class="jre1">
+                    <div class="axx">
+                        <img src="lionn-removebg-preview.png" alt="logo here">
+                        <h2>LION CINEMA</h2>
+                        <img class="star" src="starr-removebg-preview.png" alt="">
+                    </div>
+                    <h4>Get the app</h4>
+                    <div class="gt">
+                        <button onclick="zq()">
+                            <img src="download.png" alt="">
+                            <h4>Google play</h4>
+                        </button>
+                        <button onclick="qx()">
+                            <img class="rtt" src="download22.png" alt="">
+                            <h4>App Store</h4>
+                        </button>
+                    </div>
+                </div>
+                <div class="jre2">
+                    <div class="vbb">
+                        <h4>Company</h4>
+                        <div class="vbb2">
+                            <h4>About us</h4>
+                            <h4>Ticket price</h4>
+                            <h4>The ScriptBlog</h4>
+                            <h4>Experiences</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="jre3">
+                    <div class="vbb">
+                        <h4>Terms</h4>
+                        <div class="vbb2">
+                            <h4>General</h4>
+                            <h4>Ticket Sales</h4>
+                            <h4>Lioncinema++</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="jre4">
+                    <div class="vbb">
+                        <h4>Contact</h4>
+                        <div class="vbb2">
+                            <h4>Self help</h4>
+                            <h4>Contact us</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="jre5">
+                    <div class="vbb">
+                        <h4>Legal</h4>
+                        <div class="vbb2">
+                            <h4>PrivacyPolicy</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="jre6">
+                    <div class="vbb">
+                        <h4>Social</h4>
+                    </div>
+                    <div class="vbb234">
+                        <img src="download1.png" alt="">
+                        <img src="download 2.png" alt="">
+                        <img src="download 3.png" alt="">
+                        <img src="download 4.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="review-pay" id="review-pay" onclick="toggleCart()">
+            <h3>Review and Pay</h3>
+            <p id="total-amount">Total Amount: 0</p>
+        </div>
+        <div class="cart-popup" id="cart-popup">
+            <button class="close-btn" onclick="toggleCart()">X</button>
+            <h3>Your Cart</h3>
+            <div id="cart-items"></div>
+            <p id="cart-total">Total: N0</p>
+            <button onclick="payNow()">Pay Now</button>
+        </div>
+    </main>
+</body>
+</html>
+<script>
+
+    function cube() {
+        setTimeout(function() {
+            window.location.href = "cube.html";
+        }, 1000); 
+    
+    }
+
+    function blog() {
+        setTimeout(function() {
+            window.location.href = "thescriptblog.html";
+        }, 1000);
+        
+    }
+    function ga() {
+        window.location.href = "index.html";
+    }
+
+    function changeQuantity(button, change) {
+        const quantitySpan = button.parentElement.querySelector('.quantity');
+        let quantity = parseInt(quantitySpan.textContent);
+        quantity += change;
+        if (quantity < 0) quantity = 0;
+        quantitySpan.textContent = quantity;
+        updateCartCount(change);
+        updateTotalAmount();
+    }
+
+    function updateCartCount(change) {
+        const cartCount = document.getElementById('cart-count');
+        let totalQuantity = parseInt(cartCount.textContent);
+        totalQuantity += change;
+        if (totalQuantity < 0) totalQuantity = 0;
+        cartCount.textContent = totalQuantity;
+        cartCount.style.display = totalQuantity > 0 ? 'block' : 'none';
+    }
+
+    function updateTotalAmount() {
+        const quantities = document.querySelectorAll('.quantity');
+        const prices = document.querySelectorAll('.price');
+        let totalAmount = 0;
+        quantities.forEach((quantity, index) => {
+            const priceText = prices[index].textContent.replace('₦', ''); // Remove 'N' before parsing
+            totalAmount += parseInt(quantity.textContent) * parseInt(priceText);
+        });
+        document.getElementById('total-amount').textContent = `₦${totalAmount}`;
+        document.getElementById('cart-total').textContent = `Total: ₦${totalAmount}`;
+        const reviewPayDiv = document.getElementById('review-pay');
+        reviewPayDiv.style.display = totalAmount > 0 ? 'block' : 'none';
+    }
+
+    function toggleCart() {
+        const cartPopup = document.getElementById('cart-popup');
+        cartPopup.style.display = cartPopup.style.display === 'block' ? 'none' : 'block';
+        updateCartItems();
+    }
+
+    function updateCartItems() {
+        const cartItemsDiv = document.getElementById('cart-items');
+        cartItemsDiv.innerHTML = ''; // Clear previous items
+        const clear = document.getElementById('cart-count');
+        clear.innerHTML = '0';
+        const quantities = document.querySelectorAll('.quantity');
+        const prices = document.querySelectorAll('.price');
+        const items = document.querySelectorAll('.mo h2, .mo2 h2, .mo3 h2, .mo4 h2');
+        quantities.forEach((quantity, index) => {
+            if (parseInt(quantity.textContent) > 0) {
+                const item = document.createElement('div');
+                item.classList.add('item');
+                item.innerHTML = `<h2>${items[index].textContent}</h2> - <span class="price">${quantity.textContent} x N${prices[index].textContent.replace('N', '')}</span>`;
+                cartItemsDiv.appendChild(item);
+            }
+        });
+    }
+    function payNow() {
+    // Prompt the user for their email
+    const email = prompt("Please enter your email address:");
+    if (!email || !email.includes("@")) {
+        alert("Invalid email address. Please try again.");
+        return;
+    }
+
+    // Calculate the total amount
+    const totalAmountText = document.getElementById('total-amount').textContent.replace('₦', '').trim(); // Extract numeric value
+    const amountInKobo = parseInt(totalAmountText) * 100; // Convert Naira to Kobo
+
+    if (isNaN(amountInKobo) || amountInKobo <= 0) {
+        alert("Invalid total amount. Please add items to your cart.");
+        return;
+    }
+
+    // Initialize Paystack payment
+    const handler = PaystackPop.setup({
+        key: 'pk_test_c89596293d927b95998f56f466b7c50159979d6b', // Replace with your Paystack public key
+        email: email,
+        amount: amountInKobo,
+        currency: 'NGN',
+        ref: `ref_${Math.floor(Math.random() * 1000000000 + 1)}`, // Generate a unique reference
+        metadata: {
+            custom_fields: [
+                {
+                    display_name: "Customer Email",
+                    variable_name: "customer_email",
+                    value: email
+                }
+            ]
+        },
+        callback: function(response) {
+            alert('Payment successful! Transaction reference: ' + response.reference);
+
+            // Clear the cart after successful payment
+            document.querySelectorAll('.quantity').forEach(quantity => {
+                quantity.textContent = '0';
+            });
+            updateCartCount(0);
+            updateTotalAmount();
+            toggleCart();
+        },
+        onClose: function() {
+            alert('Payment process was closed.');
+        }
+    });
+
+    handler.openIframe();
+}
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const cartCount = document.getElementById('cart-count');
+        cartCount.style.display = 'none'; 
+        const reviewPayDiv = document.getElementById('review-pay');
+        reviewPayDiv.style.display = 'none'; 
+        const cartPopup = document.getElementById('cart-popup');
+        cartPopup.style.display = 'none'; 
+    });
+
+    function zq() {
+    setTimeout(function() {
+        window.location.href = "https://play.google.com/store/games?hl=en";
+    }, 1000);
+    
+  }
+
+  function qx() {
+    setTimeout(function() {
+        window.location.href = "https://www.apple.com/ios/app-store/";
+    }, 1000);
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.querySelector(".nav-dropdown-toggle");
+    const dropdown = document.querySelector(".nav-dropdown-content");
+
+    toggle.addEventListener("click", () => {
+      dropdown.classList.toggle("show");
+      toggle.textContent = dropdown.classList.contains("show") ? "close" : "menu";
+    });
+  });
+</script>

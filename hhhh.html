@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Card</title>
+    <link rel="stylesheet" href="hhhh.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <nav>
+            <img src="lionn-removebg-preview.png" alt="logo here">
+            <h2>LION CINEMA</h2>
+            <img class="star" src="starr-removebg-preview.png" alt="">
+
+            <div class="navbut">
+                <button id="reee" onclick="qww()">Food and Drinks</button>
+                <button id="jeee" onclick="cube()">The Cube</button>
+                <button id="zaaa" onclick="blog()">The Script blog</button>
+            </div>
+            <div class="navlast">
+                <button class="booyaaa" onclick="toogleCart()">Cart</button>
+            </div>
+        </nav>
+      </div>
+      <div class="bac">
+        <span class="material-symbols-outlined">arrow_back_ios_new</span>
+        <button id="grr" onclick="ga()">Go back</button>
+    </div>
+      <div class="wea">
+        <h1>Everybody Loves Jenifa</h1>
+        <hr>
+      </div>
+    <div class="ticket-card">
+        <div class="ticket-info">
+            <div class="ticket-title">THE BLOCKBUSTER PREMIUM 2D</div>
+            <div class="ticket-subtitle">Standard screen experience ticket</div>
+            <div class="ticket-price">₦7,500</div>
+        </div>
+        <div class="counter">
+            <button onclick="decreaseCount()">
+                <span class="material-symbols-outlined">remove</span>
+            </button>
+            <span id="count">0</span>
+            <button onclick="increaseCount()">
+                <span class="material-symbols-outlined">add</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="review-pay" id="review-pay" onclick="togglePopup()">
+        <h3>Review and Pay:</h3>
+        <p id="total-amount"> N0</p>
+    </div>
+    <div class="popup" id="popup">
+        <button class="close-btn" onclick="Popup()">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+        <h3>Enter Your Details</h3>
+        <input type="text" id="name" placeholder="Enter your name">
+        <input type="email" id="email" placeholder="Enter your email">
+        <button onclick="payNow()">Pay Now</button>
+    </div>
+</body>
+</html>
+
+<script>
+    function qww() {
+    setTimeout(() => {
+        window.location.href = "foods&drinks.html";
+    }, 1000)
+}
+function ga() {
+    setTimeout(() => {
+        window.location.href = "buytickets.html";
+    }, 1000);
+}
+
+    let count = 0;
+    const baseAmount = 7500; // Base amount from .ticket-price
+
+    function increaseCount() {
+        count++;
+        document.getElementById('count').innerText = count;
+        updateTotalAmount();
+    }
+
+    function decreaseCount() {
+        if (count > 0) {
+            count--;
+            document.getElementById('count').innerText = count;
+            updateTotalAmount();
+        }
+    }
+
+    function updateTotalAmount() {
+        const totalAmount = baseAmount * count;
+        const totalAmountElement = document.getElementById('total-amount');
+        totalAmountElement.textContent = `N${totalAmount}`;
+
+        const reviewPayElement = document.getElementById('review-pay');
+        if (count > 0) {
+            reviewPayElement.style.display = 'block';
+        } else {
+            reviewPayElement.style.display = 'none';
+        }
+    }
+
+    function togglePopup() {
+        const popup = document.getElementById("popup");
+        if (popup.style.display === "none" || popup.style.display === "") {
+            popup.style.display = "block";
+        } else {
+            popup.style.display = "none";
+        }
+    }
+
+    function Popup() {
+        document.getElementById("popup").style.display = "none";
+    }
+    
+    function payNow() {
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        if (email) {
+            const totalAmount = document.getElementById('total-amount').textContent.replace('N', '');
+            const popup = PaystackPop.setup({
+                key: 'pk_test_c89596293d927b95998f56f466b7c50159979d6b',
+                name: name,
+                email: email,
+                amount: parseInt(totalAmount) * 100,
+                onClose: () => {
+                    alert('Payment closed.');
+                },
+                callback: (response) => {
+                    alert('Payment successful. Transaction reference: ' + response.reference);
+                },
+                onError: (error) => {
+                    console.log("Error: ", error.message);
+                }
+            });
+            popup.openIframe();
+        }
+    }
+</script>

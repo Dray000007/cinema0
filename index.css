@@ -1,0 +1,1424 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+main{
+    width: 100%;
+    height: 130vh;
+    background-color: black;
+}
+nav{
+    width: 100%;
+    height: 10vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+nav img{
+    width: 60px;
+    height: 50px;
+    margin: 20px;
+    cursor: pointer;
+}
+nav h2{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: white;
+    margin: 30px -20px;
+    color: gold;
+    cursor: pointer;
+}
+nav .star{
+    width: 15px;
+    height: 10px;
+    margin: 22px 14px;
+}
+.navbut{
+    display: flex;
+    margin: 0 300px;
+}
+button{
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 5px;
+    margin: 30px 20px;
+    font-weight: 800;
+    cursor: pointer;
+    gap: 30px;
+    
+}
+button:hover{
+    color: antiquewhite;
+}
+.navlast{
+    right: 0;
+    position: absolute;
+}
+.navlast .booyaaa{
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 5px;
+    margin: 30px 20px;
+    font-weight: 800;
+    cursor: pointer;
+}
+.navlast .booyaaa:hover{
+    color: antiquewhite!important;
+}
+.nav-dropdown-toggle,
+.nav-dropdown-content {
+  display: none;
+}
+.carousel {
+    width: 100%;
+    max-width: 100%;
+    height: 150vh;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+
+}
+
+.carousel-inner {
+    display: flex;
+    width: 300%;
+    
+}
+
+.carousel-item {
+    width: 100%;
+    flex: 1;
+    opacity: 0;
+    position: absolute;
+    transition: opacity 1s ease-in-out;
+}
+.carousel-item img {
+    width: 100%;
+    height: 130vh;
+    
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.911);
+    position: relative;
+}
+
+/* Text Overlay */
+.carousel-text1 {
+    position: absolute;
+    bottom: 5%;
+    left: 30%;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    width: 50%;
+    font-size: 18px;
+    padding: 10px; /* Add padding for better text visibility */
+    text-align: center;
+}
+.carousel-text2{
+    position: absolute;
+    bottom: 10%;
+    left: 5%;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 15px;
+    border-radius: 20px;
+    width: 50%;
+    font-size: 18px;
+    text-align: center;
+}
+.carousel-text3 {
+    position: absolute;
+    bottom: 10%;
+    left: 5%;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 15px;
+    border-radius: 20px;
+    width: 50%;
+    font-size: 18px;
+    text-align: center;
+}
+
+/* Keyframes for smooth slide changes */
+@keyframes fadeSlides {
+    0% { opacity: 1; }
+    33% { opacity: 1; }
+    34% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+.carousel-item:nth-child(1) {
+    animation: fadeSlides 15s infinite;
+}
+.carousel-item:nth-child(2) {
+    animation: fadeSlides 15s infinite 5s;
+}
+.carousel-item:nth-child(3) {
+    animation: fadeSlides 15s infinite 10s;
+}
+.texx{
+    color: white;
+    gap: 30px;
+    position: absolute;
+    top: 30%;
+    left: 5%;
+    z-index: 0; /* Ensures it's above the image */
+    background: rgba(0, 0, 0, 0.5); /* Optional: adds contrast */
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+    height: 180px;
+    
+}
+.texx2{
+    color: white;
+    gap: 30px;
+    position: absolute;
+    top: 30%;
+    left: 5%;
+    z-index: 2; /* Ensures it's above the image */
+    background: rgba(0, 0, 0, 0.5); /* Optional: adds contrast */
+    padding: 20px;
+    border-radius: 10px;
+    width: 60%;
+    height: 180px;
+}
+.texx3{
+    color: white;
+    gap: 30px;
+    position: absolute;
+    top: 30%;
+    left: 5%;
+    z-index: 2; /* Ensures it's above the image */
+    background: rgba(0, 0, 0, 0.5); /* Optional: adds contrast */
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+    height: 180px;
+}
+.texx h2{
+    color: gold;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 30px;
+}
+.texx2 h2{
+    color: gold;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 30px;
+}
+.texx3 h2{
+    color: gold;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 30px;
+}
+.texx, .texx2, .texx3 h4{
+    font-family: italic;
+    font-size: 17px;
+    color: white;
+}
+
+section {
+    width: 100%;
+    height: 220vh;
+    background-color: rgb(46, 55, 60);
+    
+}
+.container{
+    padding-top: 60px;
+    margin: 0 20px;
+    gap: 10px;
+    position: relative;
+}
+.bq{
+    display: flex;
+    justify-content: center;
+}
+#bww{
+    width: 150px;
+    height: 50px;
+    background-color: white;
+    color: black;
+    border-radius: 20px;
+}
+#bww:hover{
+    background-color: black;
+    color: white;
+}
+#bw{
+    width: 150px;
+    height: 50px;
+    background-color: transparent;
+    border: 2px solid gold;
+    color: white;
+    border-radius: 20px;
+}
+#bw:hover{
+    background-color: gold;
+
+}
+.conna{
+    width: 99%;
+    height: 70px;
+    background-color: black;
+    border-radius: 40px;
+    position: relative;
+    
+}
+.dz1{
+    display: flex;
+    /* margin-top: -20px; */
+    position: absolute;
+    top: -20px;
+    left: 10px;
+    justify-content: center;
+}
+.qe{
+    background-color: transparent;
+
+    font-size: 17px;
+}
+.qe:hover{
+    color: white;
+}
+.qe:focus-within{
+    color: white;
+}
+.qf{
+    background-color: transparent;
+    color: rgb(114,114,114);
+    font-size: 17px;
+}
+.qf:hover{
+    color: white;
+}
+.qf:focus-within{
+    color: white;
+}
+.dz2{
+    display: flex;
+    position: absolute;
+    bottom: 8px;
+    right: 10px;
+    justify-content: center;
+    margin-top: -20px;
+}
+.ya{
+    display: flex;
+    background-color: transparent;
+    border: 3px solid gray;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    margin: 0 10px;
+}
+.yb {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: transparent;
+    border: 3px solid gray;
+    border-radius: 20px;
+    font-size: 17px;
+    font-weight: 800;
+    cursor: pointer;
+    margin: 0 10px;
+    padding: 10px;
+    position: relative; /* Ensures the dropdown is positioned correctly */
+}
+.yccc{
+    display: flex;
+    background-color: transparent;
+    border: 3px solid gray;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    margin: 0 10px;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: black;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    margin-top: 60px;
+    left: 20px;
+    cursor: pointer;
+}
+.ya:focus-within .dropdown-content{
+    display: block;
+}
+.show{
+    display: block;
+}
+.dropdown-content2 {
+    display: none;
+    position: absolute;
+    background-color: black;
+    color: white;
+    min-width: 160px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 10;
+    top: 120%; /* Positions the dropdown below the button */
+    left: 30%;
+    cursor: pointer;
+}
+.show {
+    display: block !important;
+}
+ .yb:focus-within .dropdown-content2{
+    display: block !important;
+}
+.dropdown-content3 {
+    display: none;
+    position: absolute;
+    background-color: black;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    margin-top: 50px;
+    right: 0px;
+    cursor: pointer;
+
+}
+.yccc:focus-within .dropdown-content3{
+    display: block;
+}
+
+.dropdown-content ul {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    font-family: 'Times New Roman', Times, serif;
+    display: block;
+    font-weight: 1000;
+    gap: 5px;
+}
+.dropdown-content2 ul {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 1000;
+    gap: 5px;
+}
+
+.dropdown-content3 ul li {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 1000;
+    gap: 5px;
+}
+.dropdown-content ul:hover, .dropdown-content2 ul:hover, .dropdown-content3 ul li:hover {
+    background-color: #ddd;
+    color: black;
+}
+.zae{
+    display: block;
+    
+}
+.conna2{
+    display: flex;
+    margin-top: 50px;
+    gap: 10px;
+}
+.conna4{
+    margin-top: 30px;
+}
+.b1{
+    width: 360px;
+    height: 600px;
+    border: 15px solid black;
+    background-color: black;
+    border-radius: 40px;
+}
+.pik{
+    width: 100%;
+    height: 500px;
+    background-size: cover;
+    border-radius: 20px;
+}
+.b2{
+    width: 360px;
+    height: 600px;
+    border: 15px solid black;
+    background-color: black;
+    border-radius: 40px;
+}
+.pik2{
+    width: 100%;
+    height: 500px;
+    background-size: cover;
+    border-radius: 20px;
+}
+.b3{
+    width: 360px;
+    height: 600px;
+    border: 15px solid black;
+    background-color: black;
+    border-radius: 40px;
+}
+.pik3{
+    width: 100%;
+    height: 500px;
+    background-size: cover;
+    border-radius: 20px;
+}
+.b4{
+    width: 360px;
+    height: 600px;
+    border: 15px solid black;
+    background-color: black;
+    border-radius: 40px;
+}
+.pik4{
+    width: 100%;
+    height: 500px;
+    background-size: cover;
+    border-radius: 20px;
+}
+.pik5{
+    width: 100%;
+    height: 500px;
+    background-size: cover;
+    border-radius: 20px;
+}
+.conna5{
+    margin-top: 20px;
+}
+.b66{
+    width: 360px;
+    height: 600px;
+    border: 15px solid black;
+    background-color: black;
+    border-radius: 40px;
+}
+.pik6{
+    width: 100%;
+    height: 500px;
+    
+    background-size: cover;
+    border-radius: 20px;
+}
+.ifo{
+    margin: 10px 20px;
+}
+.ifo h3{
+    color: white;
+}
+.bzz{
+    margin: -30px 20px;
+}
+.ui{
+    width: 70px;
+    height: 40px;
+    background-color: rgb(26,26,26);
+    color: gray;
+    border-radius: 15px;
+
+}
+.re{
+    font-size: 20px;
+}
+.uy{
+    width:  80px;
+    height: 40px;
+    background-color: rgb(26,26,26);
+    color: gray;
+    border-radius: 15px;
+}
+.zae2{
+    display: none;
+}
+.conna3{
+    width: 360px;
+    height: 600px;
+    border: 15px solid black;
+    background-color: black;
+    border-radius: 40px;
+    margin-top: 30px;
+}
+.sec22{
+    width: 100%;
+    height: 170vh;
+    background-color: black;
+}
+.xz{
+    display: flex;
+    padding: 60px 80px;
+    gap: 40px;
+}
+.xx1{
+    width: 800px;
+    height: 500px;
+    background-image: url(poster2.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.xx2{
+    width: 600px;
+    height: 500px;
+    background-color: transparent;
+}
+.xz2{
+    display: flex;
+    padding: 0 80px;
+    gap: 40px;
+}
+.xx22{
+    width: 800px;
+    height: 500px;
+    background-image: url(poster1.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.xx11{
+    width: 600px;
+    height: 500px;
+    background-color: transparent;
+}
+.zu{
+    color: white;
+    padding: 140px 60px;
+    gap: 1rem;
+}
+.zu h2{
+    padding: 0 50px;
+    font-size: 45px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.zu h4{
+    color: rgb(122,122,124);
+    gap: 10px;
+    font-size: 18px;
+}
+.zu button{
+    background-color: white;
+    color: black;
+    width: 100px;
+    height: 40px;
+    border-radius: 20px
+}
+.zu button:hover{
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+}
+.zu2{
+    color: white;
+    padding: 150px 60px;
+    gap: 1rem;
+}
+.zu2 h2{
+    padding: 0 50px;
+    font-size: 30px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.zu2 h4{
+    color: rgb(122,122,124);
+    gap: 10px;
+    font-size: 18px;
+}
+.zu2 button{
+    background-color: white;
+    color: black;
+    width: 100px;
+    height: 40px;
+    border-radius: 20px
+}
+.zu2 button:hover{
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+}
+.sec33{
+    width: 100%;
+    height: 150vh;
+    background-color: black;
+    position: relative;
+}
+.nm{
+    padding: 10px 600px;
+}
+.dpo{
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+    width: 130px;
+    height: 60px;
+    border-radius: 20px;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.dpo:hover{
+    background-color: white;
+    color: black;
+}
+.wro{
+    margin-top: 50px;
+}
+.wro h1{
+    font-size: 180px;
+    font-weight: 700;
+    font-weight: bold;
+    -webkit-text-stroke: 1px rgb(38,72,74); 
+    color: transparent; 
+}
+.waza{
+    width: 100%;
+    height: 300px;
+    background-color: transparent;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+}
+.jre1{
+    width: 400px;
+    height: 100%;
+    background-color: transparent;
+}
+.jre2{
+    width: 300px;
+    height: 100%;
+    background-color: transparent;
+}
+.jre3{
+    width: 300px;
+    height: 100%;
+    background-color: transparent;
+}
+.jre4{
+    width: 300px;
+    height: 100%;
+    background-color: transparent;
+}
+.jre5{
+    width: 300px;
+    height: 100%;
+    background-color: transparent;
+}
+.jre6{
+    width: 300px;
+    height: 100%;
+    background-color: transparent;
+}
+.axx{
+    display: flex;
+}
+.axx img{
+    width: 60px;
+    padding-top: 20px;
+    cursor: pointer;
+}
+.axx h2{
+    color: gold;
+    font-size: 25px;
+    padding-top: 30px;
+    cursor: pointer;
+}
+.axx .star{
+    width: 20px;
+    height: 40px;
+    cursor: pointer;
+}
+.jre1 h4{
+    color: gray;
+    padding: 20px 20px;
+    font-size: 18px;
+}
+.gt{
+    display: flex;
+}
+.gt button{
+    width: 140px ;
+    height: 50px;
+    border-radius: 5px;
+    background-color: white;
+    display: flex;
+    color: black;
+}
+.gt button img{
+    margin-right: 10px;
+}
+.gt button h4{
+    margin: -15px -54px;
+    font-size: 13px;
+    color: black;
+    font-weight: 800;
+}
+button .rtt{
+    justify-items: center;
+}
+.vbb{
+    margin: 10px 70px;
+}
+.jre2, .jre3, .jre4, .jre5 h4{
+    color: gray;
+    font-size: 15px;
+}
+.vbb2{
+    margin: 60px 0;
+}
+.vbb2 h4{
+    color: white;
+    margin-bottom: 20px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.vbb2 h4:hover{
+    color: antiquewhite;
+}
+.vbb h4{
+    color: gray;
+}
+.vbb234{
+    padding: 40px 80px;
+}
+.vbb234 img{
+    display: block;
+    margin-bottom: 20px;
+    
+}
+/* ==================== LAPTOPS & BELOW (≤1200px) ==================== */
+@media (max-width: 1238.89px) {
+    html, body {
+        overflow-x: hidden;
+        height: auto;
+    }
+
+    .navbut {
+        margin: 0 20px; /* reduced from 100px */
+    }
+
+   .sec22 {
+        height: auto;
+    }
+
+    .xz, .xz2 {
+        display: block; /* ✅ Fix for stacking .xx1, .xx22 */
+        padding: 20px;
+    }
+    .xx1 {
+        width: 800px;
+        height: 700px;
+    }
+    .xx22{
+        width: 800px;
+        height: 700px;
+    }
+     .xx2, .xx11 {
+        width: 90%;
+        height: auto;
+    }
+
+    .zu, .zu2 {
+        padding: 20px;
+    }
+
+    .nm {
+        padding: 10px 20px; /* reduced from 100px */
+    }
+
+    .bzz {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px; /* adds space without forcing overflow */
+    }
+
+    .ui, .uy {
+        width: 45%; /* better than fixed px value */
+        height: auto;
+        font-size: 0.8rem;
+        box-sizing: border-box;
+    }
+
+    .b1, .b2, .b3, .b4, .b5, .b6 {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .sec33{
+        height: auto;
+    }
+    .dpo{
+        width: 60%;
+    }
+     .waza {
+        position: static !important;
+        width: 100%;
+        margin-top: 20px;
+        background-color: transparent !important; /* Ensure no override */
+    }
+
+    .wro {
+        width: 100%;
+        margin-bottom: 20px; /* Optional: spacing before .waza */
+    }
+    .wro h1{
+        font-size: 150px;
+    }
+    
+}
+
+
+/* ==================== TABLETS (≤992px) ==================== */
+@media (max-width: 992.22px) {
+    html, body {
+        overflow-x: hidden;
+        min-height: 100vh;
+        background-color: inherit;
+    }
+
+    nav h2 {
+        font-size: 18px;
+        margin: 30px 0;
+    }
+
+    .navbut {
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 0 20px;
+    }
+
+    .carousel-text1,
+    .carousel-text2,
+    .carousel-text3,
+    .texx,
+    .texx2,
+    .texx3 {
+        width: 90%;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 14px;
+    }
+
+    .texx h2,
+    .texx2 h2,
+    .texx3 h2 {
+        font-size: 22px;
+    }
+
+    section {
+        height: auto;
+    }
+
+    .conna2 {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .b1, .b2, .b3, .b4, .b5, .b6, .b66, .conna3 {
+        width: 100%;
+        box-sizing: border-box;
+        height: auto;
+    }
+
+    .bzz {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .ui, .uy {
+        width: 45%;
+        font-size: 0.75rem;
+        height: auto;
+        box-sizing: border-box;
+    }
+
+    .nm {
+        padding: 10px 20px;
+    }
+    .sec22 {
+        height: auto;
+    }
+
+    .xz, .xz2 {
+        display: block; /* ✅ Fix for stacking .xx1, .xx22 */
+        padding: 20px;
+    }
+    .xx1 {
+        width: 700px;
+        height: 500px;
+    }
+    .xx22{
+        width: 600px;
+        height: 500px;
+    }
+     .xx2, .xx11 {
+        width: 90%;
+        height: auto;
+    }
+
+    .zu, .zu2 {
+        font-size: 13px;
+    }
+    .sec33 {
+        height: auto;
+    }
+
+    .wro {
+        width: 100%;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .wro h1 {
+        font-size: 120px !important;
+    }
+
+    .waza {
+        position: relative !important;
+        width: 100%;
+        margin-top: 20px;
+        background-color: transparent !important;
+        padding: 10px;
+        box-sizing: border-box;
+        z-index: 0;
+    }
+}
+
+
+/* ==================== PHONES (≤768px) ==================== */
+@media (max-width: 870px) {
+  nav {
+    padding: 8px 15px;
+  }
+
+  nav h2 {
+    font-size: 11px;
+    font-weight: 1300;
+  }
+
+  .navbut button,
+  .navlast .booyaaa {
+    font-size: 11px;
+    padding: 0 10px;
+  }
+
+  .navbut,
+  .navlast {
+    gap: 8px;
+  }
+
+  nav img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .carousel {
+    width: 100%;
+    min-height: 200px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .carousel-item {
+    width: 100%;
+    height: auto;
+  }
+
+  .carousel-item img {
+    width: 100%;
+    height: 130vh;
+    display: block;
+    
+  }
+
+  .carousel-text1,
+  .carousel-text2,
+  .carousel-text3,
+  .texx,
+  .texx2,
+  .texx3 {
+    width: 90%;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .texx h2,
+  .texx2 h2,
+  .texx3 h2 {
+    font-size: 20px;
+  }
+  .texx h4,.texx2 h4,.texx3 h4{
+    padding: 3px;
+  }
+  .qe, .qf{
+    font-size: 13px;
+  }
+  .ya, .yb, .yccc{
+    width: 100px;
+  }
+.ya span, .yb span, .yccc span{
+    margin: 0 -14px;
+}
+.yccc h4{
+    font-size: 14px;
+}
+  .zu h2,
+  .zu2 h2 {
+    font-size: 22px;
+    padding: 0 8px;
+  }
+
+  .zu h4,
+  .zu2 h4 {
+    font-size: 14px;
+  }
+
+  .zu,
+  .zu2 {
+    padding: 25px 8px;
+  }
+
+  .nm {
+    padding: 8px 15px;
+  }
+
+  .dpo {
+    width: 90%;
+  }
+  .wro h1 {
+    font-size: 93px !important;
+  }
+}
+/* Smaller phones: max-width 500px */
+@media (max-width: 756.67px) {
+ .navbut,
+  .navlast {
+    display: none !important;
+  }
+
+  .nav-dropdown-toggle {
+    display: block;
+    font-family: 'Material Symbols Outlined', sans-serif;
+    font-size: 28px;
+    cursor: pointer;
+    margin-left: auto;
+    padding: 25px 0;
+    z-index: 1001;
+    color: white;
+  }
+.nav-dropdown-content {
+  display: none;
+  flex-direction: column;
+  background-color: black;
+  position: absolute;
+  top: 45px;
+  right: 0;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  animation: dropdownFade 0.25s ease-in-out;
+  z-index: 1000;
+  width: 160px;       /* Smaller width */
+  padding: 4px 0;     /* Remove vertical padding */
+}
+
+.nav-dropdown-content button {
+  background: none;
+  border: none;
+  color: white;
+  text-align: left;
+  width: 100%;
+  font-size: 11px;
+  line-height: 1.2;
+  padding: 4px 8px;   /* Smaller padding for tighter spacing */
+  margin: 0;          /* Remove margin */
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.nav-dropdown-content button:hover {
+  background-color: #1a1a1a;
+  color: #ffd700;
+}
+.nav-dropdown-content.show {
+  display: flex !important;
+}
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+  .texx h2,
+  .texx2 h2,
+  .texx3 h2 {
+    font-size: 18px;
+  }
+  .conna{
+    display: none;
+  }
+  
+  .qe, .qf {
+    font-size: 12px;
+  }
+
+  .ya, .yb, .yccc {
+    width: 90px;
+  }
+
+  .ya span, .yb span, .yccc span {
+    margin: 0 -12px;
+  }
+
+  .yccc h4 {
+    font-size: 13px;
+  }
+
+  .wro h1 {
+    font-size: 90px !important;
+  }
+  .waza {
+    display: flex;
+    width: 40%;
+  }
+
+  .waza h2 {
+    font-size: 10px;
+  }
+
+  .waza h4 {
+    font-size: 11px;
+    margin: 3px 0;
+  }
+  .axx{
+    width: 40px;
+    font-size: 11px;
+  }
+
+  .axx img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .gt {
+    display: flex;
+    
+  }
+
+  .gt button {
+    display: block;
+    width: 50px;
+    font-size: 8px;
+    
+  }
+
+  .gt button img {
+    width: 10px;
+    height: 10px;
+  }
+
+  .gt button h4 {
+    font-size: 6px;
+  }
+
+  .vbb h4,
+  .vbb2 h4 {
+    font-size: 11px;
+  }
+
+  .vbb2 {
+    gap: 4px;
+  }
+
+  .vbb234 img {
+    width: 20px;
+    height: 20px;
+    margin: 2px;
+  }
+
+  .jre1,
+  .jre2,
+  .jre3,
+  .jre4,
+  .jre5,
+  .jre6 {
+    flex: 1 1 45%;
+    max-width: 48%;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+
+  /* Optional: stack jre1 full-width if needed */
+  .jre1 {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
+
+/* Very small phones: max-width 380px */
+@media (max-width: 380px) {
+.navbut,
+  .navlast {
+    display: none;
+  }
+
+  .dropdown-toggle {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 28px;
+    margin-left: auto;
+    color: white;
+    padding: 25px 0;
+  }
+
+  .mobile-dropdown {
+    display: none;
+    flex-direction: column;
+    background-color: #111;
+    padding: 10px;
+    position: absolute;
+    top: 60px; /* adjust based on nav height */
+    right: 10px;
+    z-index: 999;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+  }
+
+  .mobile-dropdown button {
+    margin: 5px 0;
+    padding: 8px 12px;
+    font-size: 12px;
+    background-color: #222;
+    color: white;
+    border: none;
+    text-align: left;
+    width: 100%;
+    border-radius: 4px;
+  }
+
+  .mobile-dropdown button:hover {
+    background-color: #333;
+  }
+
+  .texx h2,
+  .texx2 h2,
+  .texx3 h2 {
+    font-size: 16px;
+  }
+
+  .conna{
+    display: none;
+  }
+  
+  .qe, .qf {
+    font-size: 12px;
+  }
+
+  .ya, .yb, .yccc {
+    width: 90px;
+  }
+
+  .ya span, .yb span, .yccc span {
+    margin: 0 -12px;
+  }
+
+  .yccc h4 {
+    font-size: 13px;
+  }
+
+  .wro h1 {
+    font-size: 45px !important;
+  }
+  .waza {
+    display: flex;
+    width: 40%;
+  }
+
+  .waza h2 {
+    font-size: 10px;
+  }
+
+  .waza h4 {
+    font-size: 11px;
+    margin: 3px 0;
+  }
+  .axx{
+    width: 40px;
+    font-size: 11px;
+  }
+
+  .axx img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .gt {
+    display: flex;
+    
+  }
+
+  .gt button {
+    display: block;
+    width: 50px;
+    font-size: 8px;
+    
+  }
+
+  .gt button img {
+    width: 10px;
+    height: 10px;
+  }
+
+  .gt button h4 {
+    font-size: 6px;
+  }
+
+  .vbb h4,
+  .vbb2 h4 {
+    font-size: 11px;
+  }
+
+  .vbb2 {
+    gap: 4px;
+  }
+
+  .vbb234 img {
+    width: 20px;
+    height: 20px;
+    margin: 2px;
+  }
+
+  .jre1,
+  .jre2,
+  .jre3,
+  .jre4,
+  .jre5,
+  .jre6 {
+    flex: 1 1 45%;
+    max-width: 48%;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+
+  /* Optional: stack jre1 full-width if needed */
+  .jre1 {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}

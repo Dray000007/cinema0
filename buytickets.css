@@ -1,0 +1,882 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+main{
+    width: 100%;
+    height: 200vh;
+    background-color: rgb(11,11,13);
+}
+nav{
+    width: 100%;
+    height: 10vh;
+    background-color: rgba(20,20,20,0.5);
+    display: flex;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+nav img{
+    width: 60px;
+    height: 50px;
+    margin: 20px;
+    cursor: pointer;
+}
+nav h2{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: white;
+    margin: 30px -20px;
+    color: gold;
+    cursor: pointer;
+}
+nav .star{
+    width: 15px;
+    height: 10px;
+    margin: 22px 14px;
+}
+.navbut{
+    display: flex;
+    margin: 0 300px;
+}
+button{
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 5px;
+    margin: 30px 20px;
+    font-weight: 800;
+    cursor: pointer;
+    gap: 30px;
+    
+}
+button:hover{
+    color: antiquewhite;
+}
+.navlast{
+    right: 0;
+    position: absolute;
+}
+.navlast .booyaaa{
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 5px;
+    margin: 30px 20px;
+    font-weight: 800;
+    cursor: pointer;
+}
+.navlast .booyaaa:hover{
+    color: antiquewhite!important;
+}
+.background-section {
+    position: relative;
+    width: 100%;
+    height: 400px; 
+    overflow: hidden;
+    background: url('https://www.filmhouseng.com/_next/image?url=https%3A%2F%2Ffh-storage.nyc3.digitaloceanspaces.com%2Fdezjhv1zy3scumu-e1c3962d82110c3e4dfbbbfc406ae961.jpeg&w=1920&q=75') center/cover no-repeat;
+    filter: blur(5px); 
+    z-index: 0;
+}
+.background-section2 {
+    position: relative;
+    width: 100%;
+    height: 400px; 
+    overflow: hidden;
+    background: url('https://fh-storage.nyc3.digitaloceanspaces.com/8rgu635tv24wcdj-afc1f1f49d0466ca6aae6270f1877b53.jpeg') center/cover no-repeat;
+    filter: blur(5px); 
+    z-index: 0;
+}
+.background-section3{
+    position: relative;
+    width: 100%;
+    height: 400px; 
+    overflow: hidden;
+    background: url('https://fh-storage.nyc3.digitaloceanspaces.com/bueccdxtdcczg00-a681528d40ca4133d6547bf2fa7c6150.jpeg') center/cover no-repeat;
+    filter: blur(8px); 
+    z-index: 0;
+}
+
+.content, .content2, .content3{
+    position: relative;
+    z-index: 1;
+}
+.bac{
+    position: absolute;
+    bottom: 75%;
+    left: 60px;
+    display: flex;
+    color: white;
+    padding-top: 120px;
+}
+.bac button{
+    margin: -50px 0;
+    font-size: 20px;
+}
+.dff{
+    position: absolute;
+    bottom: 20%;
+    left: 250px;
+    display: flex;
+    color: white;
+    padding-top: 120px;
+    z-index: 1000;
+}
+.dff button{
+    color: goldenrod;
+    width: 150px;
+    height: 40px;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 20px;
+}
+.dff button:hover{
+    background-color: whitesmoke;
+    color: goldenrod;
+    cursor: pointer;
+}
+.buy{
+    position: absolute;
+    left: 50px;
+    top: 30%;
+}
+.b2{
+    position: relative;
+    width: 600px;
+    height: 1100px;
+    border: 15px solid black;
+    background-color: black;
+    border-radius: 40px;
+    overflow: hidden;
+}
+.pik2{
+    width: 100%;
+    height: 500px;
+    background-image: url(https://www.filmhouseng.com/_next/image?url=https%3A%2F%2Ffh-storage.nyc3.digitaloceanspaces.com%2Fdezjhv1zy3scumu-e1c3962d82110c3e4dfbbbfc406ae961.jpeg&w=1920&q=75);
+    background-size: cover;
+    border-radius: 20px;
+}
+.bzz{
+    color: white;
+    padding: 40px 20px;
+    font-size: 20px;
+    font-weight: 800;
+}
+.ifo{
+    margin: 10px 20px;
+}
+.ifo h3{
+    color: goldenrod;
+    font-size: 30px;
+}
+.bzz{
+    margin: -30px 20px;
+}
+.ui{
+    width: 70px;
+    height: 40px;
+    background-color: rgb(26,26,26);
+    color: gray;
+    border-radius: 15px;
+
+}
+.re{
+    font-size: 20px;
+}
+.uy{
+    width:  80px;
+    height: 40px;
+    background-color: rgb(26,26,26);
+    color: gray;
+    border-radius: 15px;
+}
+.dz2{
+    display: flex;
+    position: absolute;
+    top: 57%;
+    right: 50px;
+    justify-content: center;
+    margin-top: -20px;
+}
+.ya{
+    display: flex;
+    background-color: transparent;
+    border: 3px solid gray;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    margin: 0 10px;
+}
+.yb {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: transparent;
+    border: 3px solid gray;
+    border-radius: 20px;
+    font-size: 17px;
+    font-weight: 800;
+    cursor: pointer;
+    margin: 0 10px;
+    padding: 10px;
+    position: relative; /* Ensures the dropdown is positioned correctly */
+}
+.yccc{
+    display: flex;
+    background-color: transparent;
+    border: 3px solid gray;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    margin: 0 10px;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: black;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    margin-top: 60px;
+    left: 20px;
+    cursor: pointer;
+}
+.ya:focus-within .dropdown-content{
+    display: block;
+}
+.show{
+    display: block;
+}
+.dropdown-content2 {
+    display: none;
+    position: absolute;
+    background-color: black;
+    color: white;
+    min-width: 160px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 10;
+    top: 120%; /* Positions the dropdown below the button */
+    left: 30%;
+    cursor: pointer;
+}
+.show {
+    display: block !important;
+}
+ .yb:focus-within .dropdown-content2{
+    display: block !important;
+}
+.dropdown-content3 {
+    display: none;
+    position: absolute;
+    background-color: black;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    margin-top: 50px;
+    right: 0px;
+    cursor: pointer;
+
+}
+.yccc:focus-within .dropdown-content3{
+    display: block;
+}
+
+.dropdown-content ul {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    font-family: 'Times New Roman', Times, serif;
+    display: block;
+    font-weight: 1000;
+    gap: 5px;
+}
+.dropdown-content2 ul {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 1000;
+    gap: 5px;
+}
+
+.dropdown-content3 ul li {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 1000;
+    gap: 5px;
+}
+.dropdown-content ul:hover, .dropdown-content2 ul:hover, .dropdown-content3 ul li:hover {
+    background-color: #ddd;
+    color: black;
+}
+.iop{
+    color: white;
+    width: 170px;
+    height: 50px;
+    background-color: transparent;
+    border: 3px solid goldenrod;
+    border-radius: 20px;
+    position: absolute;
+    bottom: 30%;
+    left: 40px;
+}
+.iop:hover{
+    background-color: goldenrod;
+    color: white;
+    cursor: pointer;
+}
+.seatie, .seatie2, .seatie33{
+    display: none;
+    width: 400px;
+    height: 250px;
+    background-color: white;
+    border: 2px solid grey;
+    position: absolute;
+    bottom: 8%;
+    left: 50px;
+}
+.container {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+  }
+  
+  .seats {
+    display: flex;
+    flex-direction: column; /* Display seats in a column */
+    align-items: center; /* Center align seats horizontally */
+    gap: 5px;
+  }
+  
+  .row {
+    display: flex; /* Display seats in a row */
+    gap: 5px;
+    background-color: #ccc; /* Set row background color */
+  }
+  
+  .seat {
+    width: 40px;
+    height: 30px;
+    background-color: green;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8em;
+  }
+  
+  /* Change seat color when selected */
+  .seat.selected {
+    background-color: red;
+  }
+  
+.try, .try2, .try3{
+    position: absolute;
+    bottom: 0;
+    left: 200px;
+}
+.tppy, .tppy2, .tppy3{
+    width: 150px;
+    height: 40px;
+    background-color: transparent;
+    border: 2px solid goldenrod;
+    border-radius: 20px;
+    color: white;
+}
+.tppy:hover{
+    background-color: goldenrod;
+    color: white;
+    cursor: pointer;
+}
+.tppy2:hover{
+    background-color: goldenrod;
+    color: white;
+    cursor: pointer;
+}
+.tppy3:hover{
+    background-color: goldenrod;
+    color: white;
+    cursor: pointer;
+}
+.django{
+    width: 100%;
+    height: 200vh;
+    background-color: rgb(11,11,13);
+}
+.say{
+    position: absolute;
+    margin-top: -200px;
+    left: 70px;
+    
+}
+.dioo{
+    position: absolute;
+    
+    left: 250px;
+    display: flex;
+    color: white;
+    padding-top: 120px;
+    z-index: 1000;
+}
+.dioo button{
+    color: goldenrod;
+    width: 150px;
+    height: 40px;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 20px;
+}
+.dioo button:hover{
+    background-color: whitesmoke;
+    color: goldenrod;
+    cursor: pointer;
+}
+.inv{
+    width: 600px;
+    height: 1100px;
+    border: 15px solid black;
+    background-color: black;
+    border-radius: 40px;
+    
+}
+.pik9{
+    width: 100%;
+    height: 500px;
+    background-image: url(https://www.filmhouseng.com/_next/image?url=https%3A%2F%2Ffh-storage.nyc3.digitaloceanspaces.com%2Fkffwlnky1dz8ktc-2beb40289ddfaf0430db63b56208c10c.jpeg&w=1920&q=75);
+    background-size: cover;
+    border-radius: 20px;
+}
+.eppp{
+    color: white;
+    width: 170px;
+    height: 50px;
+    background-color: transparent;
+    border: 3px solid goldenrod;
+    border-radius: 20px;
+    position: absolute;
+    bottom: 30%;
+    left: 40px;
+}
+.eppp:hover{
+    background-color: goldenrod;
+    color: white;
+    cursor: pointer;
+}
+
+.ojango{
+    width: 100%;
+    height: 200vh;
+    background-color: rgb(11,11,13);
+}
+.dfff{
+    position: absolute;
+    ;
+    left: 250px;
+    display: flex;
+    color: white;
+    padding-top: 120px;
+    z-index: 1000;
+}
+.dfff button{
+    color: goldenrod;
+    width: 150px;
+    height: 40px;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 20px;
+}
+.dfff button:hover{
+    background-color: whitesmoke;
+    color: goldenrod;
+    cursor: pointer;
+}
+.pik11{
+    width: 100%;
+    height: 500px;
+    background-image: url(jenifa.jpg);
+    background-size: cover;
+    border-radius: 20px;
+}
+.tppy2{
+    width: 150px;
+    height: 40px;
+    background-color: transparent;
+    border: 2px solid goldenrod;
+    border-radius: 20px;
+    color: white;
+}
+.tppy2:hover{
+    background-color: goldenrod;
+    color: white;
+    cursor: pointer;
+}
+.nav-dropdown-toggle, .nav-dropdown-content{
+    display: none;
+}
+
+/* Max width: 1238.89px */
+@media screen and (max-width: 1238.89px) {
+  .navbut {
+    margin: 0 100px;
+  }
+  .bac, .dff, .dioo, .dfff {
+    left: 100px;
+  }
+  .buy, .seatie, .seatie2, .seatie33 {
+    left: 30px;
+  }
+  .dff, .dioo, .dfff{
+    margin: 0 130px;
+  }
+  .dz2 {
+    right: 30px;
+  }
+  .say {
+    left: 40px;
+  }
+}
+
+/* Max width: 992.22px */
+@media screen and (max-width: 1094.44px) {
+  nav h2 {
+    font-size: 18px;
+  }
+  nav img {
+    width: 50px;
+    height: 40px;
+    margin: 10px;
+  }
+  button {
+    font-size: 12px;
+    margin: 20px 10px;
+    padding: 6px 8px;
+  }
+  .navlast{
+    margin: -10px 40px;
+  }
+  .bac, .dff, .dioo, .dfff {
+    left: 100px;
+  }
+  .buy, .seatie, .seatie2, .seatie33 {
+    left: 30px;
+  }
+  .dz2 {
+    right: 30px;
+  }
+  .say {
+    left: 40px;
+  }
+}
+
+/* Max width: 768.89px */
+@media screen and (max-width: 891.11px) {
+ .navbut,
+  .navlast {
+    display: none !important;
+  }
+  .booyaaa {
+    display: none !important;
+  }
+
+  .nav-dropdown-toggle {
+    display: block;
+    font-family: 'Material Symbols Outlined', sans-serif;
+    font-size: 28px;
+    cursor: pointer;
+    margin-left: auto;
+    padding: 25px 0;
+    z-index: 1001;
+    color: white;
+  }
+.nav-dropdown-content {
+  display: none;
+  flex-direction: column;
+  background-color: white;
+  position: absolute;
+  top: 45px;
+  right: 0;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  animation: dropdownFade 0.25s ease-in-out;
+  z-index: 1000;
+  width: 160px;       /* Smaller width */
+  padding: 4px 0;     /* Remove vertical padding */
+}
+
+.nav-dropdown-content button {
+  background: none;
+  border: none;
+  color: black;
+  text-align: left;
+  width: 100%;
+  font-size: 11px;
+  line-height: 1.2;
+  padding: 4px 8px;   /* Smaller padding for tighter spacing */
+  margin: 0;          /* Remove margin */
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+.nav-dropdown-content.show {
+  display: flex !important;
+}
+
+.nav-dropdown-content button:hover {
+  background-color: #1a1a1a;
+  color: #ffd700;
+}
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+  .bac, .dff, .dioo, .dfff {
+    left: 100px;
+  }
+  .buy, .seatie, .seatie2, .seatie33 {
+    left: 30px;
+  }
+  .dz2 {
+    right: 30px;
+  }
+  .say {
+    left: 40px;
+  }
+}
+
+/* Max width: 500px */
+@media screen and (max-width: 658.89px) {
+  .navbut,
+  .navlast {
+    display: none !important;
+  }
+  .booyaaa {
+    display: none !important;
+  }
+
+  .nav-dropdown-toggle {
+    display: block;
+    font-family: 'Material Symbols Outlined', sans-serif;
+    font-size: 28px;
+    cursor: pointer;
+    margin-left: auto;
+    padding: 25px 0;
+    z-index: 1001;
+    color: white;
+  }
+.nav-dropdown-content {
+  display: none;
+  flex-direction: column;
+  background-color: white;
+  position: absolute;
+  top: 45px;
+  right: 0;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  animation: dropdownFade 0.25s ease-in-out;
+  z-index: 1000;
+  width: 160px;       /* Smaller width */
+  padding: 4px 0;     /* Remove vertical padding */
+}
+
+.nav-dropdown-content button {
+  background: none;
+  border: none;
+  color: black;
+  text-align: left;
+  width: 100%;
+  font-size: 11px;
+  line-height: 1.2;
+  padding: 4px 8px;   /* Smaller padding for tighter spacing */
+  margin: 0;          /* Remove margin */
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+.nav-dropdown-content.show {
+  display: flex !important;
+}
+
+.nav-dropdown-content button:hover {
+  background-color: #1a1a1a;
+  color: #ffd700;
+}
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+  .bac {
+    left: 100px;
+  }
+  .buy, .seatie, .seatie2, .seatie33 {
+    left: 30px;
+  }
+  .dff, .dioo, .dfff{
+    margin: 0 -40px;
+  }
+  .dz2 {
+    right: 30px;
+  }
+  .b2, .inv{
+    width: 450px;
+    height: 1150px;
+  }
+  .say {
+    left: 40px;
+  }
+.tppy, .tppy2, .tppy3{
+    margin: 20px -35px;
+}
+   
+}
+
+/* Max width: 380px */
+@media screen and (max-width: 506.67px) {
+   .navbut,
+  .navlast {
+    display: none !important;
+  }
+  .booyaaa {
+    display: none !important;
+  }
+
+  .nav-dropdown-toggle {
+    display: block;
+    font-family: 'Material Symbols Outlined', sans-serif;
+    font-size: 28px;
+    cursor: pointer;
+    margin-left: auto;
+    padding: 25px 0;
+    z-index: 1001;
+    color: white;
+  }
+.nav-dropdown-content {
+  display: none;
+  flex-direction: column;
+  background-color: white;
+  position: absolute;
+  top: 45px;
+  right: 0;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  animation: dropdownFade 0.25s ease-in-out;
+  z-index: 1000;
+  width: 160px;       /* Smaller width */
+  padding: 4px 0;     /* Remove vertical padding */
+}
+
+.nav-dropdown-content button {
+  background: none;
+  border: none;
+  color: black;
+  text-align: left;
+  width: 100%;
+  font-size: 11px;
+  line-height: 1.2;
+  padding: 4px 8px;   /* Smaller padding for tighter spacing */
+  margin: 0;          /* Remove margin */
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+.nav-dropdown-content.show {
+  display: flex !important;
+}
+
+.nav-dropdown-content button:hover {
+  background-color: #1a1a1a;
+  color: #ffd700;
+}
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+  .bac {
+    left: 100px;
+  }
+  .buy, .seatie, .seatie2, .seatie33 {
+    left: 30px;
+  }
+  .dz2 {
+    right: 30px;
+  }
+  .b2, .inv{
+    width: 350px;
+    height: 1300px;
+  }
+  .say {
+    left: 40px;
+  }
+.tppy, .tppy2{
+    margin: 30px -90px;
+}
+.tppy3{
+    margin: 50px -90px;
+}
+ main{
+    height: 250vh;
+ }  
+ .ojango{
+    height: 230vh;
+ }
+
+ .juu{
+    margin: 30px 0;
+ }
+ .ya, .yb, .yccc{
+    width: 90px;
+    font-size: 14px;
+ }
+ .ya h4{
+    margin: 10px 0;
+ }
+ .ya span{
+    margin: 8px -20px;
+ }
+ .django{
+    height: 230vh;
+ }
+
+ .yb span{
+    padding: 0 -10px;
+ }
+ .yccc h4{
+     margin: 10px 0;
+ }
+ .yccc span{
+    margin: 5px -20px;
+ }
+ .dz2{
+    margin: 0 -20px;
+ }
+}
+

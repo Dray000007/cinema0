@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Tickets</title>
+    <link rel="stylesheet" href="buytickets.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+        import { getFirestore, doc, getDoc, setDoc, collection } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyC25aNduNOEoQ6et4xssi6vQXM-7rIJrhY",
+            authDomain: "fire-c99ac.firebaseapp.com",
+            projectId: "fire-c99ac",
+            storageBucket: "fire-c99ac.appspot.com",
+            messagingSenderId: "158060566547",
+            appId: "1:158060566547:web:45430b0ef0e068cf4e87e6"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        
+        async function createSeats(containerId) {
+            const container = document.querySelector(`#${containerId} .seats`);
+            const rows = 6;
+            const seatsPerRow = 8;
+        
+            const disabledSeatsRef = doc(db, "disabledSeats", containerId);
+            let disabledSeats = [];
+        
+            try {
+                const docSnap = await getDoc(disabledSeatsRef);
+                if (docSnap.exists()) {
+                    disabledSeats = docSnap.data().seats || [];
+                    console.log("Loaded disabled seats:", disabledSeats);
+                }
+            } catch (err) {
+                console.error("Error loading disabled seats:", err);
+            }
+        
+            for (let i = 1; i <= rows; i++) {
+                const row = document.createElement("div");
+                row.classList.add("row");
+        
+                for (let j = 1; j <= seatsPerRow; j++) {
+                    const seatId = `${i}-${j}`;
+                    const seat = document.createElement("div");
+                    seat.classList.add("seat");
+                    seat.innerText = seatId;
+        
+                    // Mark seats as disabled if they're in the disabledSeats array
+                    if (disabledSeats.includes(seatId)) {
+                        seat.classList.add("temp-disabled");
+                        seat.style.pointerEvents = 'none';
+                        seat.style.backgroundColor = 'gray';
+                    }
+        
+                    seat.addEventListener("click", async () => {
+                        if (seat.classList.contains("temp-disabled")) {
+                            console.log("This seat is temporarily disabled.");
+                            return;
+                        }
+        
+                        seat.classList.toggle("selected");
+        
+                        const selectedSeats = Array.from(container.querySelectorAll('.seat.selected')).map(s => s.innerText);
+        
+                        try {
+                            console.log("Saving selected seats to Firestore:", selectedSeats);
+                            await setDoc(doc(db, "seatSelection", containerId), { seats: selectedSeats });
+                            console.log("Seats updated successfully");
+                        } catch (err) {
+                            console.error("Failed to save seats:", err);
+                        }
+                    });
+        
+                    row.appendChild(seat);
+                }
+                container.appendChild(row);
+            }
+        }
+        
+        async function clearSeatData(containerId, resetImmediately = false) {
+            const disabledRef = doc(db, 'disabledSeats', containerId);
+        
+            if (resetImmediately) {
+                await setDoc(disabledRef, { seats: [] });
+                sessionStorage.setItem(`sessionEnded-${containerId}`, 'false');
+                console.log(`Reset disabledSeats for ${containerId} immediately.`);
+            } else {
+                console.log("Waiting for payment process to finish...");
+            }
+        }
+        
+        async function handlePostPaymentSeats(containerId) {
+            if (sessionStorage.getItem('paymentSuccess') === 'true') {
+                const disabledRef = doc(db, 'disabledSeats', containerId);
+                const container = document.querySelector(`#${containerId} .seats`);
+        
+                try {
+                    const disabledSnap = await getDoc(disabledRef);
+                    const disabledSeats = disabledSnap.exists() ? disabledSnap.data().seats || [] : [];
+        
+                    if (disabledSeats.length > 0) {
+                        disabledSeats.forEach(seatId => {
+                            const seat = Array.from(container.querySelectorAll('.seat')).find(s => s.innerText === seatId);
+                            if (seat) {
+                                seat.classList.add('temp-disabled');
+                                seat.style.pointerEvents = 'none';
+                                seat.style.backgroundColor = 'gray';
+                            }
+                        });
+        
+                        // Start the countdown for re-enabling the seats
+                        startCountdown(30, containerId);
+        
+                        // Store disabled seats in Firestore
+                        await setDoc(disabledRef, { seats: disabledSeats });
+                    }
+        
+                    // Wait for 30 seconds before re-enabling seats
+                    setTimeout(async () => {
+                        // Re-enable the seats
+                        disabledSeats.forEach(seatId => {
+                            const seat = Array.from(container.querySelectorAll('.seat')).find(s => s.innerText === seatId);
+                            if (seat) {
+                                seat.classList.remove('temp-disabled');
+                                seat.style.pointerEvents = 'auto';
+                                seat.style.backgroundColor = '';
+                            }
+                        });
+        
+                        // Clear the disabled seats data in Firestore
+                        await setDoc(disabledRef, { seats: [] });
+        
+                        // Reset session state after timeout
+                        sessionStorage.setItem(`sessionEnded-${containerId}`, 'true');
+                        sessionStorage.setItem('paymentSuccess', 'false');
+        
+                        console.log(`30s expired: Cleared disabled data for ${containerId}`);
+                    }, 30000);  // 30 seconds timeout
+        
+                } catch (err) {
+                    console.error(`Error processing seats for ${containerId}:`, err);
+                }
+            }
+        }
+        
+        function startCountdown(seconds, containerId) {
+            let countdown = seconds;
+            const countdownInterval = setInterval(() => {
+                // Instead of clearing the console, we just update the countdown on a single line
+                console.log(`Time remaining: ${countdown} seconds`);
+        
+                if (countdown <= 0) {
+                    clearInterval(countdownInterval);  // Stop the countdown when it reaches 0
+                }
+                countdown--;
+            }, 1000);
+        }
+        
+        const containerIds = ['seatie', 'seatie2', 'seatie33'];
+        
+        window.addEventListener("DOMContentLoaded", async () => {
+            for (const containerId of containerIds) {
+                await createSeats(containerId);
+                await handlePostPaymentSeats(containerId);
+            }
+        });
+        
+        window.addEventListener("load", async () => {
+            for (const containerId of containerIds) {
+                const selectedRef = doc(db, 'seatSelection', containerId);
+                const selectedSnap = await getDoc(selectedRef);
+                const selectedSeats = selectedSnap.exists() ? selectedSnap.data().seats || [] : [];
+        
+                if (selectedSeats.length === 0) {
+                    await clearSeatData(containerId, true);
+                } else {
+                    await clearSeatData(containerId);
+                }
+            }
+        });
+    </script>
+    
+
+</head>
+<body>
+    <main>
+        <div class="navbar">
+          <nav>
+              <img src="lionn-removebg-preview.png" alt="logo here">
+              <h2>LION CINEMA</h2>
+              <img class="star" src="starr-removebg-preview.png" alt="">
+                   
+              <span class="material-symbols-outlined nav-dropdown-toggle">menu</span>
+                    <div class="nav-dropdown-content">
+                    <button onclick="qww()">Food and Drinks</button>
+                    <button onclick="cube()">The Cube</button>
+                    <button onclick="blog()">The Script blog</button>
+                    <button onclick="toogleCart()">Cart</button>
+                    </div>
+              <div class="navbut">
+                  <button id="reee" onclick="qww()">Food and Drinks</button>
+                  <button id="jeee" onclick="cube()">The Cube</button>
+                  <button id="zaaa" onclick="blog()">The Script blog</button>
+              </div>
+                <div class="navlast"></div>
+                  <button class="booyaaa" onclick="toggleCart()">Cart</button>
+                </div>
+          </nav>
+          <div class="background-section">
+            <div class="content"></div>
+        </div>
+        <div class="bac">
+            <span class="material-symbols-outlined">arrow_back_ios_new</span>
+            <button id="grr" onclick="ga()">Go back</button>
+        </div>
+        <div class="dff">
+            <button onclick="trea()">Watch trailer</button>
+        </div>
+
+        <div class="buy">
+            <div class="b2">
+             <div class="pik2"></div>
+                <div class="ifo">
+                  <h3 class="re">Mufasa: The Lion King</h3>
+                  <div class="bzz">Select location</div>
+                </div>
+              </div>
+              <div class="dz2">
+                <button class="ya" onclick="toggleDropdown('dropdown-ya')">
+                  <h4 id="selected-text-ya">Lagos</h4>
+                  <span class="material-symbols-outlined">keyboard_arrow_down</span>
+                </button>
+                  <div class="dropdown-content" id="dropdown-ya">
+                      <ul onclick="selectItemYA(this)">Lagos</ul>
+                      <ul onclick="selectItemYA(this)">Edo</ul>
+                      <ul onclick="selectItemYA(this)">Oyo</ul>
+                      <ul onclick="selectItemYA(this)">Kano</ul>
+                      <ul onclick="selectItemYA(this)">Ondo</ul>
+                  </div>
+                  <button class="yb" onclick="toggleDropdown('dropdown-yb')">
+                      <h4 id="selected-text-yb">Ikeja</h4>
+                      <span class="material-symbols-outlined">keyboard_arrow_down</span>
+                  </button>
+                  <div class="dropdown-content2" id="dropdown-yb">
+                      <ul onclick="selectItemYB(this)">Ikeja</ul>
+                      <ul onclick="selectItemYB(this)">Ikota</ul>
+                      <ul onclick="selectItemYB(this)">Landmark</ul>
+                      <ul onclick="selectItemYB(this)">Oniru</ul>
+                      <ul onclick="selectItemYB(this)">Surulere</ul>
+                  </div>
+                  <button class="yccc" onclick="srcc()">
+                    <h4 id="selected-date">Today</h4>
+                    <span class="material-symbols-outlined">keyboard_arrow_down</span>
+                  </button>
+                  
+                  <div class="dropdown-content3" id="dropdown-yc">
+                    <ul>
+                      <li onclick="updateButtonText(this)">Mar 1</li>
+                      <li onclick="updateButtonText(this)">Mar 2</li>
+                      <li onclick="updateButtonText(this)">Mar 3</li>
+                      <li onclick="updateButtonText(this)">Mar 4</li>
+                      <li onclick="updateButtonText(this)">Mar 5</li>
+                    </ul>
+                  </div>
+                </div>
+                <button class="iop" onclick="showSeats()">Choose your seat</button>
+                <div class="seatie" id="seatie">
+                    <div class="container">
+                      <div class="seats"></div>
+                    </div>
+                  </div>
+                  
+                <div class="try">
+                    <button class="tppy" onclick="bookTicket()">Book now</button>
+                </div>
+              
+            </div>
+            </div>
+        </div>
+  </main>  
+  <section class="django">
+      <div class="background-section2">
+        <div class="content2"></div>
+      </div>
+    
+    <div class="dioo">
+        <button onclick="rea()">Watch trailer</button>
+    </div>
+    <div class="say">
+         <div class="inv">
+          <div class="pik9"></div>
+                <div class="ifo">
+                  <h3 class="re">Captain America: Brave</h3>
+                  <div class="bzz">Select location</div>
+                </div>
+
+                <div class="dz2">
+                  <button class="ya" onclick="toggleDropdown('dropdown-ya2')">
+                    <h4 id="selected-text-ya2">Lagos</h4>
+                    <span class="material-symbols-outlined">keyboard_arrow_down</span>
+                  </button>
+                    <div class="dropdown-content" id="dropdown-ya2">
+                        <ul onclick="selectItemYA2(this)">Lagos</ul>
+                        <ul onclick="selectItemYA2(this)">Edo</ul>
+                        <ul onclick="selectItemYA2(this)">Oyo</ul>
+                        <ul onclick="selectItemYA2(this)">Kano</ul>
+                        <ul onclick="selectItemYA2(this)">Ondo</ul>
+                    </div>
+                    <button class="yb" onclick="toggleDropdown('dropdown-yb2')">
+                        <h4 id="selected-text-yb2">Ikeja</h4>
+                        <span class="material-symbols-outlined">keyboard_arrow_down</span>
+                    </button>
+                    <div class="dropdown-content2" id="dropdown-yb2">
+                        <ul onclick="selectItemYB2(this)">Ikeja</ul>
+                        <ul onclick="selectItemYB2(this)">Ikota</ul>
+                        <ul onclick="selectItemYB2(this)">Landmark</ul>
+                        <ul onclick="selectItemYB2(this)">Oniru</ul>
+                        <ul onclick="selectItemYB2(this)">Surulere</ul>
+                    </div>
+                    <button class="yccc" onclick="srcc2()">
+                      <h4 id="selected-date2">Today</h4>
+                      <span class="material-symbols-outlined">keyboard_arrow_down</span>
+                    </button>
+                    
+                    <div class="dropdown-content3" id="dropdown-yc2">
+                        <ul id="srcc2">
+                          <li onclick="updateButtonText2(this)">Mar 1</li>
+                          <li onclick="updateButtonText2(this)">Mar 2</li>
+                          <li onclick="updateButtonText2(this)">Mar 3</li>
+                          <li onclick="updateButtonText2(this)">Mar 4</li>
+                          <li onclick="updateButtonText2(this)">Mar 5</li>
+                        </ul>
+                      </div>
+                  </div>
+
+                  <button class="eppp" onclick="showSeats2()">Choose your seat</button>
+                <div class="seatie2" id="seatie2">
+                    <div class="container">
+                        <div class="seats"></div>
+                      </div>
+                </div>
+            </div>
+            <div class="try2">
+              <button class="tppy2" onclick="bookTicket2()">Book now</button>
+          </div>
+        </div>
+    </div>
+      
+    </section> 
+
+    <section class="ojango">
+        <div class="background-section3">
+          <div class="content3"></div>
+        </div>
+        <div class="dfff">
+          <button onclick="ea()">Watch trailer</button>
+      </div>
+        <div class="say seeb">
+          <div class="inv juu">
+           <div class="pik11"></div>
+                 <div class="ifo">
+                   <h3 class="re">Everybody Loves Jenifa</h3>
+                   <div class="bzz">Select location</div>
+                 </div>
+            </div>
+
+            <div class="dz2">
+              <button class="ya" onclick="toggleDropdown('dropdown-ya3')">
+                <h4 id="selected-text-ya3">Lagos</h4>
+                <span class="material-symbols-outlined">keyboard_arrow_down</span>
+              </button>
+                <div class="dropdown-content" id="dropdown-ya3">
+                    <ul onclick="selectItemYA3(this)">Lagos</ul>
+                    <ul onclick="selectItemYA3(this)">Edo</ul>
+                    <ul onclick="selectItemYA3(this)">Oyo</ul>
+                    <ul onclick="selectItemYA3(this)">Kano</ul>
+                    <ul onclick="selectItemYA3(this)">Ondo</ul>
+                </div>
+                <button class="yb" onclick="toggleDropdown('dropdown-yb3')">
+                    <h4 id="selected-text-yb3">Ikeja</h4>
+                    <span class="material-symbols-outlined">keyboard_arrow_down</span>
+                </button>
+                <div class="dropdown-content2" id="dropdown-yb3">
+                    <ul onclick="selectItemYB3(this)">Ikeja</ul>
+                    <ul onclick="selectItemYB3(this)">Ikota</ul>
+                    <ul onclick="selectItemYB3(this)">Landmark</ul>
+                    <ul onclick="selectItemYB3(this)">Oniru</ul>
+                    <ul onclick="selectItemYB3(this)">Surulere</ul>
+                </div>
+                <button class="yccc" onclick="srcc3()">
+                  <h4 id="selected-date3">Today</h4>
+                  <span class="material-symbols-outlined">keyboard_arrow_down</span>
+                </button>
+                
+                <div class="dropdown-content3" id="dropdown-yc3">
+                    <ul id="srcc3">
+                      <li onclick="updateButtonText3(this)">Mar 1</li>
+                      <li onclick="updateButtonText3(this)">Mar 2</li>
+                      <li onclick="updateButtonText3(this)">Mar 3</li>
+                      <li onclick="updateButtonText3(this)">Mar 4</li>
+                      <li onclick="updateButtonText3(this)">Mar 5</li>
+                    </ul>
+                  </div>
+              </div>
+              <button class="eppp" onclick="showSeats3()">Choose your seat</button>
+              <div class="seatie33" id="seatie33">
+                <div class="container">
+                    <div class="seats"></div>
+                  </div>
+              </div>
+                  
+          <div class="try3">
+            <button class="tppy3" onclick="bookTicket3()">Book now</button>
+        </div>
+        </div>  
+    </section>
+</body>
+</html>
+<script>
+  function qww() {
+    setTimeout(() => {
+        window.location.href = "foods&drinks.html";
+    }, 1000)
+}
+
+function cube() {
+    setTimeout(() => {
+        window.location.href = "cube.html";
+    }, 1000)
+}
+function blog() {
+    setTimeout(() => {
+        window.location.href = "thescriptblog.html";
+    }, 1000)
+}
+  function ga() {
+      setTimeout(() => {
+          window.location.href = "index.html";
+      }, 1000);
+  }
+
+  function trea() {
+      setTimeout(() => {
+          window.location.href = "https://www.youtube.com/watch?v=lMXh6vjiZrI";
+      }, 1000);
+  }
+
+// Your web app's Firebase configuration
+
+
+
+  const locationMap = {
+      "Lagos": ["Ikeja", "Ikota", "Landmark", "Oniru", "Surulere"],
+      "Edo": ["Benin", "Uromi", "Ekpoma", "Auchi", "Igueben"],
+      "Oyo": ["Ibadan", "Ogbomosho", "Oyo Town", "Iseyin", "Eruwa"],
+      "Kano": ["Kano City", "Dala", "Gwale", "Fagge", "Ungogo"],
+      "Ondo": ["Akure", "Owo", "Ondo Town", "Ikare", "Irele"]
+  };
+
+  function toggleDropdown(id) {
+      document.querySelectorAll('.dropdown-content, .dropdown-content2, .dropdown-content3').forEach(dropdown => {
+          if (dropdown.id !== id) {
+              dropdown.classList.remove('show');
+          }
+      });
+      
+      var dropdown = document.getElementById(id);
+      dropdown.classList.toggle("show");
+  }
+
+  function selectItemYA(element) {
+      let selectedState = element.textContent;
+      document.getElementById("selected-text-ya").textContent = selectedState;
+
+      let ybDropdown = document.getElementById("dropdown-yb");
+      ybDropdown.innerHTML = "";
+
+      locationMap[selectedState].forEach(location => {
+          let ul = document.createElement("ul");
+          ul.textContent = location;
+          ul.onclick = function() { selectItemYB(this); };
+          ybDropdown.appendChild(ul);
+      });
+
+      document.getElementById("dropdown-ya").classList.remove("show");
+      document.getElementById("selected-text-yb").textContent = locationMap[selectedState][0];
+  }
+
+  function selectItemYB(element) {
+      let selectedLocation = element.textContent;
+      document.getElementById("selected-text-yb").textContent = selectedLocation;
+      document.getElementById("dropdown-yb").classList.remove("show");
+  }
+
+  function srcc() {
+      let dropdown = document.getElementById("dropdown-yc");
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+  }
+
+  function updateButtonText(element) {
+      document.getElementById("selected-date").innerText = element.innerText;
+      document.getElementById("dropdown-yc").style.display = "none"; 
+  }
+
+  function updateDateList() {
+  const dropdownIds = ["dropdown-yc", "dropdown-yc2", "dropdown-yc3"];
+  const today = new Date();
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  dropdownIds.forEach(id => {
+    const dropdown = document.getElementById(id);
+    if (dropdown) {
+      const liElements = dropdown.querySelectorAll("li");
+      liElements.forEach((li, index) => {
+        const date = new Date(today);
+        date.setDate(today.getDate() + index);
+        const month = monthNames[date.getMonth()];
+        const day = date.getDate();
+        li.textContent = `${month} ${day}`;
+      });
+    }
+  });
+}
+
+window.onload = updateDateList;
+
+
+  function showSeats() {
+      const seatie = document.getElementById('seatie');
+      seatie.style.display = seatie.style.display === 'block' ? 'none' : 'block';
+  }
+
+  
+
+
+
+function bookTicket() {
+  setTimeout(() => {
+      window.location.href = "booknow.html";
+  }, 1000);
+}
+
+  // Functions for .pik9
+  function rea() {
+      setTimeout(() => {
+          window.location.href = "https://www.youtube.com/watch?v=1pHDWnXmK7Y";
+      }, 1000);
+  }
+  function selectItemYA2(element) {
+      let selectedState = element.textContent;
+      document.getElementById("selected-text-ya2").textContent = selectedState;
+
+      let ybDropdown = document.getElementById("dropdown-yb2");
+      ybDropdown.innerHTML = "";
+
+      locationMap[selectedState].forEach(location => {
+          let ul = document.createElement("ul");
+          ul.textContent = location;
+          ul.onclick = function() { selectItemYB2(this); };
+          ybDropdown.appendChild(ul);
+      });
+
+      document.getElementById("dropdown-ya2").classList.remove("show");
+      document.getElementById("selected-text-yb2").textContent = locationMap[selectedState][0];
+  }
+
+  function selectItemYB2(element) {
+      let selectedLocation = element.textContent;
+      document.getElementById("selected-text-yb2").textContent = selectedLocation;
+      document.getElementById("dropdown-yb2").classList.remove("show");
+  }
+
+  function srcc2() {
+      let dropdown = document.getElementById("dropdown-yc2");
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+  }
+
+  function updateButtonText2(element) {
+      document.getElementById("selected-date2").innerText = element.innerText;
+      document.getElementById("dropdown-yc2").style.display = "none"; // Hide dropdown after selection
+  }
+  function showSeats2() {
+      const seatie2 = document.getElementById('seatie2');
+      seatie2.style.display = seatie2.style.display === 'block' ? 'none': 'block';
+  }
+
+  function bookTicket2() {
+    setTimeout(() => {
+        window.location.href = "booknow2.html";
+    }, 1000);
+  }
+
+  
+  // Functions for .pik11
+  function ea() {
+      setTimeout(() => {
+          window.location.href = "https://www.youtube.com/watch?v=x4JIoP5FlhU";
+      }, 1000);
+  }
+
+  function srcc3() {
+      let dropdown = document.getElementById("dropdown-yc3");
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+  }
+
+  function updateButtonText3(element) {
+      document.getElementById("selected-date3").innerText = element.innerText;
+      document.getElementById("dropdown-yc3").style.display = "none"; // Hide dropdown after selection
+  }
+  function showSeats3() {
+      const seatie33 = document.getElementById('seatie33');
+      seatie33.style.display = seatie33.style.display === 'block' ? 'none' : 'block';
+  }
+  function selectItemYA3(element) {
+    let selectedState = element.textContent;
+    document.getElementById("selected-text-ya3").textContent = selectedState;
+
+    let ybDropdown = document.getElementById("dropdown-yb3");
+    ybDropdown.innerHTML = "";
+
+    locationMap[selectedState].forEach(location => {
+        let ul = document.createElement("ul");
+        ul.textContent = location;
+        ul.onclick = function() { selectItemYB3(this); };
+        ybDropdown.appendChild(ul);
+    });
+
+    document.getElementById("dropdown-ya3").classList.remove("show");
+    document.getElementById("selected-text-yb3").textContent = locationMap[selectedState][0];
+}
+
+function selectItemYB3(element) {
+    let selectedLocation = element.textContent;
+    document.getElementById("selected-text-yb3").textContent = selectedLocation;
+    document.getElementById("dropdown-yb3").classList.remove("show");
+}
+  function bookTicket3() {
+    setTimeout(() => {
+        window.location.href = "booknow3.html";
+    }, 1000);
+  }
+   document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.querySelector(".nav-dropdown-toggle");
+    const dropdown = document.querySelector(".nav-dropdown-content");
+
+    toggle.addEventListener("click", () => {
+      dropdown.classList.toggle("show");
+      toggle.textContent = dropdown.classList.contains("show") ? "close" : "menu";
+    });
+  });
+</script>
